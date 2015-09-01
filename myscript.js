@@ -360,35 +360,35 @@ function floor(num) {
   }
 }
 function hideElements(){
-  if (player.tech >= 50){
+  if (player.android >= 5){
     document.getElementById('andro').style.display = 'block';
   }
-  if (player.tech >= 250){
+  if (player.robot >= 5){
     document.getElementById('robo').style.display = 'block';
   }
-  if (player.tech >= 500){
+  if (player.resLab >= 5){
     document.getElementById('resLabo').style.display = 'block';
   }
-  if (player.tech >= 1000){
+  if (player.resFac >= 5){
     document.getElementById('resFact').style.display = 'block';
   }
-  if (player.tech >= 2000){
+  if (player.roboticsFact >= 5){
     document.getElementById('robFact').style.display = 'block';
   }
-  if (player.tech >= 3000){
+  if (player.cyberLab >= 5){
     document.getElementById('cyberLabo').style.display = 'block';
   }
 //energy
-if (player.energy >= 250){
+if (player.pwrGen >= 5){
   document.getElementById('pwrgen').style.display = 'block';
 }
-if (player.energy >= 500){
+if (player.genRoom >= 5){
   document.getElementById('generoom').style.display = 'block';
 }
-if (player.energy >= 1000){
+if (player.solPan >= 5){
   document.getElementById('solarpan').style.display = 'block';
 }
-if (player.energy >= 2000){
+if (player.solPanFarm >= 5){
   document.getElementById('solarfarm').style.display = 'block';
 }
 }
