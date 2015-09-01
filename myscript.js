@@ -57,35 +57,35 @@ var player = {
     owned: 0,
     cost: 15,
     nextC: 15,
-    generates: 1,
+    generates: 0.1,
   },
   pwrGen: {
     name: "Power Generator",
     owned: 0,
     cost: 15,
     nextC: 15,
-    generates: 1,
+    generates: 0.5,
   },
   genRoom: {
     name: "Generator Room",
     owned: 0,
-    cost: 15,
-    nextC: 15,
-    generates: 1,
+    cost: 100,
+    nextC: 100,
+    generates: 4,
   },
   solPan: {
     name: "Solar Panels",
     owned: 0,
-    cost: 15,
-    nextC: 15,
-    generates: 1,
+    cost: 500,
+    nextC: 500,
+    generates: 10,
   },
   solPanFarm: {
     name: "Solar Panel Farm",
     owned: 0,
-    cost: 15,
-    nextC: 15,
-    generates: 1,
+    cost: 3000,
+    nextC: 3000,
+    generates: 40,
   },
   upgrades: {
     //Auto CLicker
@@ -320,9 +320,8 @@ function buyUpgrade(techcost, energycost, up, amount) {
     player.energy -= energycost;
     player.upgrades[up] = amount;
     console.log("Done, upgrade purchased");
-    document.getElementById('buttontest').className = "upgrade-unlocked";
+    document.getElementById(up).className = "btn btn-success";
   }
-  console.log("UP" + " " + up);
 }
 
 function backgroundChange() {
@@ -429,22 +428,102 @@ function updateTotals() {
   document.getElementsByClassName('Cost')[5].innerHTML = suffixy(player.roboticsFact.nextC, 2);
   document.getElementsByClassName('Cost')[6].innerHTML = suffixy(player.cyberLab.nextC, 2);
   //Cost Energy
-  document.getElementsByClassName('Cost')[7].innerHTML = suffixy(player.battPack.nextC);
-  document.getElementsByClassName('Cost')[8].innerHTML = suffixy(player.pwrGen.nextC);
-  document.getElementsByClassName('Cost')[9].innerHTML = suffixy(player.genRoom.nextC);
-  document.getElementsByClassName('Cost')[10].innerHTML = suffixy(player.solPan.nextC);
-  document.getElementsByClassName('Cost')[11].innerHTML = suffixy(player.solPanFarm.nextC);
+  document.getElementsByClassName('Cost')[7].innerHTML = suffixy(player.battPack.nextC, 2);
+  document.getElementsByClassName('Cost')[8].innerHTML = suffixy(player.pwrGen.nextC, 2);
+  document.getElementsByClassName('Cost')[9].innerHTML = suffixy(player.genRoom.nextC, 2);
+  document.getElementsByClassName('Cost')[10].innerHTML = suffixy(player.solPan.nextC, 2);
+  document.getElementsByClassName('Cost')[11].innerHTML = suffixy(player.solPanFarm.nextC, 2);
 
 }
 
 function checkUpgrades() {
+  //Engineer Upgrades
   if (player.upgrades.engi5Perc !== 0) {
-    document.getElementById('buttontest').className = "btn btn-success";
+    document.getElementById('engi5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.engi25Perc !== 0) {
+    document.getElementById('engi25Perc').className = "btn btn-success";
+  }
+  //Android Upgrades
+  if (player.upgrades.andro5Perc !== 0) {
+    document.getElementById('andro5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.andro25Perc !== 0) {
+    document.getElementById('andro25Perc').className = "btn btn-success";
+  }
+  //Robot Upgrades
+  if (player.upgrades.robot5Perc !== 0) {
+    document.getElementById('robot5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.robot25Perc !== 0) {
+    document.getElementById('robot25Perc').className = "btn btn-success";
+  }
+  //Research Lab Upgrades
+  if (player.upgrades.resLab5Perc !== 0) {
+    document.getElementById('resLab5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.resLab25Perc !== 0) {
+    document.getElementById('resLab25Perc').className = "btn btn-success";
+  }
+  //Research Facility Upgrades
+  if (player.upgrades.resFact5Perc !== 0) {
+    document.getElementById('resFact5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.resFact25Perc !== 0) {
+    document.getElementById('resFact25Perc').className = "btn btn-success";
+  }
+  //Robotics Factory Upgrades
+  if (player.upgrades.roboFact5Perc !== 0) {
+    document.getElementById('roboFact5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.roboFact25Perc !== 0) {
+    document.getElementById('roboFact25Perc').className = "btn btn-success";
+  }
+  //Cybernetics Lab Upgrades
+  if (player.upgrades.cybLab5Perc !== 0) {
+    document.getElementById('cybLab5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.cybLab25Perc !== 0) {
+    document.getElementById('cybLab25Perc').className = "btn btn-success";
+  }
+  //Battery Pack Upgrades
+  if (player.upgrades.battPck5Perc !== 0) {
+    document.getElementById('battPck5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.battPck25Perc !== 0) {
+    document.getElementById('battPck25Perc').className = "btn btn-success";
+  }
+  //Power Generators Upgrades
+  if (player.upgrades.pwrGen5Perc !== 0) {
+    document.getElementById('pwrGen5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.pwrGen25Perc !== 0) {
+    document.getElementById('pwrGen25Perc').className = "btn btn-success";
+  }
+  //Generator Room Upgrades
+  if (player.upgrades.genRoom5Perc !== 0) {
+    document.getElementById('genRoom5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.genRoom25Perc !== 0) {
+    document.getElementById('genRoom25Perc').className = "btn btn-success";
+  }
+  //Solar Panel Upgrades
+  if (player.upgrades.solPan5Perc !== 0) {
+    document.getElementById('solPan5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.solPan25Perc !== 0) {
+    document.getElementById('solPan25Perc').className = "btn btn-success";
+  }
+  //Solar Panel Farm Upgrades
+  if (player.upgrades.solPanFarm5Perc !== 0) {
+    document.getElementById('solPanFarm5Perc').className = "btn btn-success";
+  }
+  if (player.upgrades.solPanFarm25Perc !== 0) {
+    document.getElementById('solPanFarm25Perc').className = "btn btn-success";
   }
 }
 
 window.setInterval(function() {
-  console.log(player.engineer.nextC);
   updateTotals();
   gameSave();
   getResource(player, 'tech' , 1);
@@ -477,11 +556,9 @@ window.setInterval(function() {
     document.getElementById('Tech').innerHTML = suffixy(player.tech, 1);
   }
   if (player.energy <= 1000) {
-    document.getElementById('Energy').innerHTML = player.energy;
+    document.getElementById('Energy').innerHTML = prettify(player.energy);
   } else {
     document.getElementById('Energy').innerHTML = suffixy(player.energy, 1);
   }
-  checkUpgrades();
+//  checkUpgrades();
 }, 100);
-
-//Elements hide function
