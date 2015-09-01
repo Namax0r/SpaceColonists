@@ -19,7 +19,7 @@
   </script>
 </head>
 
-<body onload="gameLoad()">
+<body onload="gameLoad(); checkUpgrades()">
   <p id="nick">Coded by <a href="https://github.com/KoKsMAN" target="_blank">KoKsMAN</a> & <a href="https://github.com/Nak0o0" target="_blank">Nak0o0</a></p>
   <div id="social-links">
     <a href="https://www.reddit.com/user/KoKsM4N/" target="_blank">
@@ -351,22 +351,22 @@
                   <div class="col-md-4">
                     <span>Engineer</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" id="buttontest" class="btn btn-default" onclick="buyUpgrade(10, 10, 'engi5Perc', 0.005 )">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'engi25Perc', 0.025 )">Upgrade 25%</button>
+                      <button type="button"  id="engi5Perc" class="btn btn-default" onclick="buyUpgrade(10000, 10000, 'engi5Perc', 0.005)">5% for 10k</button>
+                      <button type="button"  id="engi25Perc" class="btn btn-default" onclick="buyUpgrade(50000, 50000, 'engi25Perc', 0.025)">25% for 50k</button>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <span>Android</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'andro5Perc', 0.025)">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'andro25Perc', 0.125)">Upgrade 25%</button>
+                      <button type="button" id="andro5Perc" class="btn btn-default" onclick="buyUpgrade(100000, 100000, 'andro5Perc', 0.025)">5% for 100k</button>
+                      <button type="button" id="andro25Perc" class="btn btn-default" onclick="buyUpgrade(500000, 500000, 'andro25Perc', 0.125)">25% for 500k</button>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <span>Robot</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'robot5Perc', 0.2)">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'robot25Perc', 1)">Upgrade 25%</button>
+                      <button type="button" id="robot5Perc" class="btn btn-default" onclick="buyUpgrade(1000000, 1000000, 'robot5Perc', 0.2)">5% for 1M</button>
+                      <button type="button" id="robot25Perc" class="btn btn-default" onclick="buyUpgrade(5000000, 5000000, 'robot25Perc', 1)">25% for 5M</button>
                     </div>
                   </div>
                 </div>
@@ -374,22 +374,22 @@
                   <div class="col-md-4">
                     <span>Research Lab</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'resLab5Perc', 0.5)">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'resLab25Perc', 2.5)">Upgrade 25%</button>
+                      <button type="button" id="resLab5Perc" class="btn btn-default" onclick="buyUpgrade(10000000, 10000000, 'resLab5Perc', 0.5)">5% for 10M</button>
+                      <button type="button" id="resLab25Perc" class="btn btn-default" onclick="buyUpgrade(50000000, 50000000, 'resLab25Perc', 2.5)">25% for 50M</button>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <span>Research Facility</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'resFac5Perc', 2)">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'resFac25Perc', 10)">Upgrade 25%</button>
+                      <button type="button" id="resFact5Perc" class="btn btn-default" onclick="buyUpgrade(100000000, 100000000, 'resFact5Perc', 2)">5% for 100M</button>
+                      <button type="button" id="resFact25Perc" class="btn btn-default" onclick="buyUpgrade(500000000, 500000000, 'resFact25Perc', 10)">25% for 500M</button>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <span>Robotics Factory</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'roboFact5Perc', 5)">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'roboFact25Perc', 25)">Upgrade 25%</button>
+                      <button type="button" id="roboFact5Perc" class="btn btn-default" onclick="buyUpgrade(1000000000, 1000000000, 'roboFact5Perc', 5)">5% for 1B</button>
+                      <button type="button" id="roboFact25Perc" class="btn btn-default" onclick="buyUpgrade(5000000000, 5000000000, 'roboFact25Perc', 25)">25% for 5B</button>
                     </div>
                   </div>
                 </div>
@@ -397,8 +397,8 @@
                   <div class="col-md-4">
                     <span>Cybernetics Lab</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab5Perc', 20)">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab25Perc', 100)">Upgrade 25%</button>
+                      <button type="button" id="cybLab5Perc" class="btn btn-default" onclick="buyUpgrade(10000000000, 10000000000, 'cybLab5Perc', 20)">5% for 10B</button>
+                      <button type="button" id="cybLab25Perc" class="btn btn-default" onclick="buyUpgrade(50000000000, 50000000000, 'cybLab25Perc', 100)">25% for 50B</button>
                     </div>
                   </div>
                 </div>
@@ -409,36 +409,36 @@
                   <div class="col-md-4">
                     <span>Battery Pack</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab5Perc', 20)">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab25Perc', 100)">Upgrade 25%</button>
+                      <button type="button" id="battPck5Perc" class="btn btn-default" onclick="buyUpgrade(10000, 10000, 'battPck5Perc', 20)">5% for 10k</button>
+                      <button type="button" id="battPck25Perc" class="btn btn-default" onclick="buyUpgrade(50000, 50000, 'battPck25Perc', 100)">25% for 50k</button>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <span>Power Generator</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab5Perc', 20)">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab25Perc', 100)">Upgrade 25%</button>
+                      <button type="button" id="pwrGen5Perc" class="btn btn-default" onclick="buyUpgrade(100000, 100000, 'pwrGen5Perc', 20)">5% for 100k</button>
+                      <button type="button" id="pwrGen25Perc" class="btn btn-default" onclick="buyUpgrade(500000, 500000, 'pwrGen25Perc', 100)">25% for 500k</button>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <span>Generator Room</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab5Perc', 20)">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab25Perc', 100)">Upgrade 25%</button>
+                      <button type="button" id="genRoom5Perc" class="btn btn-default" onclick="buyUpgrade(1000000, 1000000, 'genRoom5Perc', 20)">5% for 1M</button>
+                      <button type="button" id="genRoom25Perc" class="btn btn-default" onclick="buyUpgrade(5000000, 5000000, 'genRoom25Perc', 100)">5% for 5M</button>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <span>Solar Panel</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab5Perc', 20)">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab25Perc', 100)">Upgrade 25%</button>
+                      <button type="button" id="solPan5Perc" class="btn btn-default" onclick="buyUpgrade(10000000, 10000000, 'solPan5Perc', 20)">5% for 10M</button>
+                      <button type="button" id="solPan25Perc" class="btn btn-default" onclick="buyUpgrade(50000000, 50000000, 'solPan25Perc', 100)">5% for 50M</button>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <span>Solar Panel Farm</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab5Perc', 20)">Upgrade 5%</button>
-                      <button type="button" class="btn btn-default" onclick="buyUpgrade(10, 10, 'cybLab25Perc', 100)">Upgrade 25%</button>
+                      <button type="button" id="solPanFarm5Perc" class="btn btn-default" onclick="buyUpgrade(100000000, 100000000, 'solPanFarm5Perc', 20)">5% for 100M</button>
+                      <button type="button" id="solPanFarm25Perc" class="btn btn-default" onclick="buyUpgrade(500000000, 500000000, 'solPanFarm25Perc', 100)">25% for 500M</button>
                     </div>
                   </div>
                 </div>
@@ -462,32 +462,32 @@
           <h5>Tech</h5>
           <div class="media">
             <div id="first" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Collect 100 Tech</h4>
               <p class="media-para">A first step in the new world.</p>
             </div>
           </div>
           <div class="media">
             <div id="second" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Collect 10.000 Tech</h4>
             </div>
           </div>
           <div class="media">
             <div id="third" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Collect 100.000 Tech</h4>
             </div>
           </div>
           <div class="media">
             <div id="fourth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Collect 1.000.000 Tech</h4>
             </div>
           </div>
           <div class="media">
             <div id="fifth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Collect 50.000.000 Tech</h4>
             </div>
           </div>
@@ -495,31 +495,31 @@
           <h5>Energy</h5>
           <div class="media">
             <div id="sixth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Collect 1.000 Energy</h4>
             </div>
           </div>
           <div class="media">
             <div id="seventh" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Collect 10.000 Energy</h4>
             </div>
           </div>
           <div class="media">
             <div id="eighth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Collect 100.000 Energy</h4>
             </div>
           </div>
           <div class="media">
             <div id="nineth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Collect 1.000.000 Energy</h4>
             </div>
           </div>
           <div class="media">
             <div id="tenth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Collect 50.000.000 Energy</h4>
             </div>
           </div>
@@ -527,31 +527,31 @@
           <h5>Engineers</h5>
           <div class="media">
             <div id="eleventh" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 1 engineer</h4>
             </div>
           </div>
           <div class="media">
             <div id="twelfth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 500 engineers</h4>
             </div>
           </div>
           <div class="media">
             <div id="thirteenth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 1.000 engineers</h4>
             </div>
           </div>
           <div class="media">
             <div id="fourteenth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 5.000 engineers</h4>
             </div>
           </div>
           <div class="media">
             <div id="fifteenth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 10.000 engineers</h4>
             </div>
           </div>
@@ -559,31 +559,31 @@
           <h5>Androids</h5>
           <div class="media">
             <div id="sixteenth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 5 androids</h4>
             </div>
           </div>
           <div class="media">
             <div id="seventeenth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 400 androids</h4>
             </div>
           </div>
           <div class="media">
             <div id="eighteenth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 900 androids</h4>
             </div>
           </div>
           <div class="media">
             <div id="nineteenth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 4.000 androids</h4>
             </div>
           </div>
           <div class="media">
             <div id="twentieth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 9.000 androids</h4>
             </div>
           </div>
@@ -591,31 +591,31 @@
           <h5>Robots</h5>
           <div class="media">
             <div id="twenty_first" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 10 robots</h4>
             </div>
           </div>
           <div class="media">
             <div id="twenty_second" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 450 robots</h4>
             </div>
           </div>
           <div class="media">
             <div id="twenty_third" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 950 robots</h4>
             </div>
           </div>
           <div class="media">
             <div id="twenty_fourth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 4.500 robots</h4>
             </div>
           </div>
           <div class="media">
             <div id="twenty_fifth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 9.500 robots</h4>
             </div>
           </div>
@@ -623,31 +623,31 @@
           <h5>Research Lab</h5>
           <div class="media">
             <div id="twenty_sixth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 50 Research Labs</h4>
             </div>
           </div>
           <div class="media">
             <div id="twenty_seventh" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 700 Research Labs</h4>
             </div>
           </div>
           <div class="media">
             <div id="twenty_eighth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 1.300 Research Labs</h4>
             </div>
           </div>
           <div class="media">
             <div id="twenty_nineth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 6.000 Research Labs</h4>
             </div>
           </div>
           <div class="media">
             <div id="thirtieth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 10.000 Research Labs</h4>
             </div>
           </div>
@@ -655,31 +655,31 @@
           <h5>Research Facility</h5>
           <div class="media">
             <div id="thirty_first" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 40 Research Facilities</h4>
             </div>
           </div>
           <div class="media">
             <div id="thirty_second" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 600 Research Facilities</h4>
             </div>
           </div>
           <div class="media">
             <div id="thirty_third" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 1.000 Research Facilities</h4>
             </div>
           </div>
           <div class="media">
             <div id="thirty_fourth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 5.000 Research Facilities</h4>
             </div>
           </div>
           <div class="media">
             <div id="thirty_fifth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 10.000 Research Facilities</h4>
             </div>
           </div>
@@ -687,31 +687,31 @@
           <h5>Robotics Factory</h5>
           <div class="media">
             <div id="thirty_sixth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 60 Robotics Factories</h4>
             </div>
           </div>
           <div class="media">
             <div id="thirty_seventh" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 600 Robotics Factories</h4>
             </div>
           </div>
           <div class="media">
             <div id="thirty_eighth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 1.200 Robotics Factories</h4>
             </div>
           </div>
           <div class="media">
             <div id="thirty_nineth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 5.500 Robotics Factories</h4>
             </div>
           </div>
           <div class="media">
             <div id="fortieth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 10.000 Robotics Factories</h4>
             </div>
           </div>
@@ -719,31 +719,31 @@
           <h5>Cybernetics Lab</h5>
           <div class="media">
             <div id="forty_first" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 80 Cybernetics Labs</h4>
             </div>
           </div>
           <div class="media">
             <div id="forty_second" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 800 Cybernetics Labs</h4>
             </div>
           </div>
           <div class="media">
             <div id="forty_third" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 1.600 Cybernetics Labs</h4>
             </div>
           </div>
           <div class="media">
             <div id="forty_fourth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 6.000 Cybernetics Labs</h4>
             </div>
           </div>
           <div class="media">
             <div id="forty_fifth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 10.000 Cybernetics Labs</h4>
             </div>
           </div>
@@ -752,31 +752,31 @@
           <h5>Battery Pack</h5>
           <div class="media">
             <div id="forty_sixth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 1 Battery Packs</h4>
             </div>
           </div>
           <div class="media">
             <div id="forty_seventh" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 500 Battery Packs</h4>
             </div>
           </div>
           <div class="media">
             <div id="forty_eighth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 1000 Battery Packs</h4>
             </div>
           </div>
           <div class="media">
             <div id="forty_nineth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 5000 Battery Packs</h4>
             </div>
           </div>
           <div class="media">
             <div id="fiftieth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 10.000 Battery Packs</h4>
             </div>
           </div>
@@ -784,31 +784,31 @@
           <h5>Power Generator</h5>
           <div class="media">
             <div id="fifty_first" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 5 Power Generators</h4>
             </div>
           </div>
           <div class="media">
             <div id="fifty_second" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 400 Power Generators</h4>
             </div>
           </div>
           <div class="media">
             <div id="fifty_third" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 900 Power Generators</h4>
             </div>
           </div>
           <div class="media">
             <div id="fifty_fourth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 4000 Power Generators</h4>
             </div>
           </div>
           <div class="media">
             <div id="fifty_fifth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 9000 Power Generators</h4>
             </div>
           </div>
@@ -816,31 +816,31 @@
           <h5>Generator Room</h5>
           <div class="media">
             <div id="fifty_sixth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 15 Generator Rooms</h4>
             </div>
           </div>
           <div class="media">
             <div id="fifty_seventh" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 450 Generator Rooms</h4>
             </div>
           </div>
           <div class="media">
             <div id="fifty_eighth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 970 Generator Rooms</h4>
             </div>
           </div>
           <div class="media">
             <div id="fifty_nineth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 4600 Generator Rooms</h4>
             </div>
           </div>
           <div class="media">
             <div id="sixtieth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 9800 Generator Rooms</h4>
             </div>
           </div>
@@ -848,31 +848,31 @@
           <h5>Solar Panel</h5>
           <div class="media">
             <div id="sixty_first" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 20 Solar Panels</h4>
             </div>
           </div>
           <div class="media">
             <div id="sixty_second" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 200 Solar Panels</h4>
             </div>
           </div>
           <div class="media">
             <div id="sixty_third" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 1200 Solar Panels</h4>
             </div>
           </div>
           <div class="media">
             <div id="sixty_fourth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 6000 Solar Panels</h4>
             </div>
           </div>
           <div class="media">
             <div id="sixty_fifth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 10.000 Solar Panels</h4>
             </div>
           </div>
@@ -880,31 +880,31 @@
           <h5>Solar Panel Farms</h5>
           <div class="media">
             <div id="sixty_sixth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 80 Solar Panel Farms</h4>
             </div>
           </div>
           <div class="media">
             <div id="sixty_seventh" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 800 Solar Panel Farms</h4>
             </div>
           </div>
           <div class="media">
             <div id="sixty_eighth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 1600 Solar Panel Farms</h4>
             </div>
           </div>
           <div class="media">
             <div id="sixty_nineth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 6000 Solar Panel Farms</h4>
             </div>
           </div>
           <div class="media">
             <div id="seventieth" class="media-body">
-              <p class="achpoints">5</p>
+              <p class="achpoints">1</p>
               <h4 class="media-heading">Bought 10.000 Solar Panel Farms</h4>
             </div>
           </div>
@@ -912,7 +912,8 @@
         <!-- ============ SETTINGS TAB ============ -->
         <div id="settings" class="tab-pane fade">
           <p id="changelog"><a href="https://github.com/KoKsMAN/Collaborative/blob/master/README.md" target="_blank">Changelog</a></p>
-          <p>Press "Delete Save" button to remove save data from local storage</p>
+          <p>Layout resources found on <a href="http://www.freepik.com/">Freepik.</a></p>
+          <p>Press "Delete Save" button to remove save data from local storage.</p>
           <button type="button" id="Delete" onclick="deleteSave()">Delete Save</button>
         </div>
       </div>

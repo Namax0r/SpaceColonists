@@ -1,9 +1,8 @@
 function checkAchievements() {
               //Tech Achievements
   //1.
-  if (player.tech === 100 && player.achievements.first !== 1) {
+  if (player.tech >= 100 && player.achievements.first !== 1) {
     player.achievements.first = 1;
-    alert("Achievement Unlocked");
     player.achievements.points++;
   }
   if (player.achievements.first !== 0) {
@@ -11,7 +10,7 @@ function checkAchievements() {
 
   }
   //2
-  if (player.tech === 10000 && player.achievements.second !== 1) {
+  if (player.tech >= 10000 && player.achievements.second !== 1) {
     player.achievements.second = 1;
     player.achievements.points++;
   }
@@ -19,21 +18,22 @@ function checkAchievements() {
     document.getElementById("second").className = "achievement-unlocked";
   }
   //3
-  if (player.tech === 100000 && player.achievements.third !== 1) {
+  if (player.tech >= 100000 && player.achievements.third !== 1) {
     player.achievements.third = 1;
+    player.achievements.points++;
   }
   if (player.achievements.third !== 0) {
     document.getElementById("third").className = "achievement-unlocked";
   }
   //4
-  if (player.tech === 1000000 && player.achievements.fourth !== 1) {
+  if (player.tech >= 1000000 && player.achievements.fourth !== 1) {
     player.achievements.fourth = 1;
   }
   if (player.achievements.fourth !== 0) {
     document.getElementById("fourth").className = "achievement-unlocked";
   }
   //5
-  if (player.tech === 50000000 && player.achievements.fifth !== 1) {
+  if (player.tech >= 50000000 && player.achievements.fifth !== 1) {
     player.achievements.fifth = 1;
   }
   if (player.achievements.fifth !== 0) {
@@ -41,35 +41,38 @@ function checkAchievements() {
   }
               //Energy Achievements
   //6
-  if (player.energy === 1000 && player.achievements.sixth !== 1) {
+  if (player.energy >= 1000 && player.achievements.sixth !== 1) {
     player.achievements.sixth = 1;
+    player.achievements.points++;
   }
   if (player.achievements.sixth !== 0) {
     document.getElementById("sixth").className = "achievement-unlocked";
   }
   //7
-  if (player.energy === 10000 && player.achievements.seventh !== 1) {
+  if (player.energy >= 10000 && player.achievements.seventh !== 1) {
     player.achievements.seventh = 1;
+    player.achievements.points++;
   }
   if (player.achievements.seventh !== 0) {
     document.getElementById("seventh").className = "achievement-unlocked";
   }
   //8
-  if (player.energy === 100000 && player.achievements.eighth !== 1) {
+  if (player.energy >= 100000 && player.achievements.eighth !== 1) {
     player.achievements.eighth = 1;
+    player.achievements.points++;
   }
   if (player.achievements.eighth !== 0) {
     document.getElementById("eighth").className = "achievement-unlocked";
   }
   //9
-  if (player.energy === 1000000 && player.achievements.nineth !== 1) {
+  if (player.energy >= 1000000 && player.achievements.nineth !== 1) {
     player.achievements.nineth = 1;
   }
   if (player.achievements.nineth !== 0) {
     document.getElementById("nineth").className = "achievement-unlocked";
   }
   //10
-  if (player.energy === 50000000 && player.achievements.tenth !== 1) {
+  if (player.energy >= 50000000 && player.achievements.tenth !== 1) {
     player.achievements.tenth = 1;
   }
   if (player.achievements.tenth !== 0) {
@@ -109,7 +112,7 @@ function checkAchievements() {
     document.getElementById("fourteenth").className = "achievement-unlocked";
   }
   //15
-  if (player.engineer.owned === 5 && player.achievements.fifteenth !== 1) {
+  if (player.engineer.owned === 10000 && player.achievements.fifteenth !== 1) {
     player.achievements.fifteenth = 1;
     player.achievements.points++;
   }
@@ -120,6 +123,7 @@ function checkAchievements() {
   //16
   if (player.android.owned === 5 && player.achievements.sixteenth !== 1) {
     player.achievements.sixteenth = 1;
+    player.achievements.points++;
   }
   if (player.achievements.sixteenth !== 0) {
     document.getElementById("sixteenth").className = "achievement-unlocked";
@@ -156,6 +160,7 @@ function checkAchievements() {
   //21
   if (player.android.owned === 10 && player.achievements.twenty_first !== 1) {
     player.achievements.twenty_first = 1;
+    player.achievements.points++;
   }
   if (player.achievements.twenty_first !== 0) {
     document.getElementById("twenty_first").className = "achievement-unlocked";
@@ -192,6 +197,7 @@ function checkAchievements() {
   //26
   if (player.resLab.owned === 50 && player.achievements.twenty_sixth !== 1) {
     player.achievements.twenty_sixth = 1;
+    player.achievements.points++;
   }
   if (player.achievements.twenty_sixth !== 0) {
     document.getElementById("twenty_sixth").className = "achievement-unlocked";
