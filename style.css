@@ -44,9 +44,17 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 #achievements li {margin-bottom: 2px; font-size: 18px;}
 #achievements h5 {margin-left: 5px; text-align: center; color: black;}
 #achievements h4 {font-size: 20px;}
+#current-version{text-align: center; color: black; background-color: #F7F7F7;}
+#done li {color: #1aa30c;}
+#to-be-done li {color: #a30c0c;}
+.changelog-item {background-color: #F7F7F7;}
+.changelog-item h3 {text-decoration: underline; font-size: 22px; color:black; font-family: "Arial";font-weight: bold; margin-left: 5px;}
+.changelog-exp {background-image: url('img/achievement3.png');font-size: 30px; color:white; font-family: "Arial"; font-weight: bold; text-align: center; background-color: #F7F7F7;}
+.changelog-item li, .changelog-item a {font-size: 20px; color: black; font-family: "Courier New"; font-weight: bold;}
 .unlocked {background-color: green;}
 #Player-upgrades li, #Tech-upgrades li, #Energy-upgrades li {color: black;}
 ul {list-style-type: none;}
+#Game-Save {left: 50%; right: 50%; color: white; display: none; position: absolute; width: 200px; height: 50px;}
 /* PSEUDO CLASSES */
 .btn:hover {background-color: #A1C436;}
 #techbtn:hover {background-color: #5bc436; color: black;}
@@ -54,6 +62,7 @@ ul {list-style-type: none;}
 #upgradesbtn:hover {background-color: #0c5fe8; color: black;}
 #settingsbtn:hover {background-color: #E8930C; color: black;}
 #achbtn:hover {background-color: #cc0ce8; color: black;}
+#newsbtn:hover {background-color: #e80c26; color: black;}
 #upgrades a:hover {color:black;}
 ul:hover {color: black;}
 .glyphicon {color: #808080;}

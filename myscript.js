@@ -203,6 +203,9 @@ nums = ['k', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No', 'De', 'UnD', 'Du
 //game save
 function gameSave() {
   localStorage.setItem("player", JSON.stringify(player));
+  $(document).ready(function(){
+    $('#Game-Save').delay().fadeIn('slow').delay(2000).fadeOut('slow');
+});
 }
 //game load
 function gameLoad() {
@@ -523,10 +526,13 @@ function checkUpgrades() {
     document.getElementById('solPanFarm25Perc').className = "btn btn-success";
   }
 }
+window.setInterval(function() {
+  gameSave();
+  //save_game();
+}, 60000);
 
 window.setInterval(function() {
   updateTotals();
-  gameSave();
   getResource(player, 'tech' , 1);
   getResource(player, 'energy', 1);
   hideElements();
