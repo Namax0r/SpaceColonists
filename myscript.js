@@ -62,29 +62,29 @@ var player = {
   pwrGen: {
     name: "Power Generator",
     owned: 0,
-    cost: 15,
-    nextC: 15,
+    cost: 100,
+    nextC: 100,
     generates: 0.5,
   },
   genRoom: {
     name: "Generator Room",
     owned: 0,
-    cost: 100,
-    nextC: 100,
+    cost: 500,
+    nextC: 500,
     generates: 4,
   },
   solPan: {
     name: "Solar Panels",
     owned: 0,
-    cost: 500,
-    nextC: 500,
+    cost: 3000,
+    nextC: 3000,
     generates: 10,
   },
   solPanFarm: {
     name: "Solar Panel Farm",
     owned: 0,
-    cost: 3000,
-    nextC: 3000,
+    cost: 10000,
+    nextC: 10000,
     generates: 40,
   },
   upgrades: {
@@ -395,6 +395,7 @@ if (player.energy >= 2000){
   document.getElementById('solarfarm').style.display = 'block';
 }
 }
+
 function updateTotals() {
   player.tech += ((player.engineer.owned * (player.engineer.generates + player.upgrades.engi5Perc + player.upgrades.engi25Perc)));
   player.tech += ((player.android.owned * (player.android.generates + player.upgrades.andro5Perc + player.upgrades.andro25Perc)));
