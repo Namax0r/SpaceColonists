@@ -203,6 +203,9 @@ nums = ['k', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No', 'De', 'UnD', 'Du
 //game save
 function gameSave() {
   localStorage.setItem("player", JSON.stringify(player));
+  $(document).ready(function(){
+    $('#Game-Save').delay().fadeIn('slow').delay(2000).fadeOut('slow');
+});
 }
 //game load
 function gameLoad() {
@@ -360,35 +363,35 @@ function floor(num) {
   }
 }
 function hideElements(){
-  if (player.android >= 5){
+  if (player.tech >= 50){
     document.getElementById('andro').style.display = 'block';
   }
-  if (player.robot >= 5){
+  if (player.tech >= 250){
     document.getElementById('robo').style.display = 'block';
   }
-  if (player.resLab >= 5){
+  if (player.tech >= 500){
     document.getElementById('resLabo').style.display = 'block';
   }
-  if (player.resFac >= 5){
+  if (player.tech >= 1000){
     document.getElementById('resFact').style.display = 'block';
   }
-  if (player.roboticsFact >= 5){
+  if (player.tech >= 2000){
     document.getElementById('robFact').style.display = 'block';
   }
-  if (player.cyberLab >= 5){
+  if (player.tech >= 3000){
     document.getElementById('cyberLabo').style.display = 'block';
   }
 //energy
-if (player.pwrGen >= 5){
+if (player.energy >= 250){
   document.getElementById('pwrgen').style.display = 'block';
 }
-if (player.genRoom >= 5){
+if (player.energy >= 500){
   document.getElementById('generoom').style.display = 'block';
 }
-if (player.solPan >= 5){
+if (player.energy >= 1000){
   document.getElementById('solarpan').style.display = 'block';
 }
-if (player.solPanFarm >= 5){
+if (player.energy >= 2000){
   document.getElementById('solarfarm').style.display = 'block';
 }
 }
@@ -522,10 +525,13 @@ function checkUpgrades() {
     document.getElementById('solPanFarm25Perc').className = "btn btn-success";
   }
 }
+window.setInterval(function() {
+  gameSave();
+  //save_game();
+}, 60000);
 
 window.setInterval(function() {
   updateTotals();
-  gameSave();
   getResource(player, 'tech' , 1);
   getResource(player, 'energy', 1);
   hideElements();

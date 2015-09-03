@@ -5,6 +5,7 @@
   <title>Space Colonists</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="myscript.js"></script>
@@ -17,6 +18,7 @@
       });
     });
   </script>
+
 </head>
 
 <body onload="gameLoad(); checkUpgrades()">
@@ -65,6 +67,10 @@
         <li>
           <a id="settingsbtn" href="#settings">
             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</a>
+        </li>
+        <li>
+          <a id="newsbtn" href="#news">
+            <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> News</a>
         </li>
       </ul>
 
@@ -351,8 +357,8 @@
                   <div class="col-md-4">
                     <span>Engineer</span>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button"  id="engi5Perc" class="btn btn-default" onclick="buyUpgrade(10000, 10000, 'engi5Perc', 0.005)">5% for 10k</button>
-                      <button type="button"  id="engi25Perc" class="btn btn-default" onclick="buyUpgrade(50000, 50000, 'engi25Perc', 0.025)">25% for 50k</button>
+                      <button type="button" id="engi5Perc" class="btn btn-default" onclick="buyUpgrade(10000, 10000, 'engi5Perc', 0.005)">5% for 10k</button>
+                      <button type="button" id="engi25Perc" class="btn btn-default" onclick="buyUpgrade(50000, 50000, 'engi25Perc', 0.025)">25% for 50k</button>
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -913,12 +919,229 @@
         <div id="settings" class="tab-pane fade">
           <p id="changelog"><a href="https://github.com/KoKsMAN/Collaborative/blob/master/README.md" target="_blank">Changelog</a></p>
           <p>Layout resources found on <a href="http://www.freepik.com/">Freepik.</a></p>
+          <br />
+          <p>The Game saves progress automatically every 1 minute.</p>
+          <p>Press "Save Game" button to save game if you don't want to wait for auto save.</p>
+          <button type="button" id="Delete" onclick="gameSave()">Save Game</button>
+          <br />
+          <br />
           <p>Press "Delete Save" button to remove save data from local storage.</p>
           <button type="button" id="Delete" onclick="deleteSave()">Delete Save</button>
         </div>
+        <!-- ============ NEWS TAB ============ -->
+        <div id="news" class="tab-pane fade">
+          <h1 id="current-version">*Current Version 0.3.6*</h1>
+          <h2 class="changelog-exp">Development road map</h2>
+          <div class="changelog-item">
+            <h3>DONE:</h3>
+            <ul id="done">
+              <li>- Basic functionality</li>
+              <li>- Basic game's topic</li>
+              <li>- Basic units, currency and buildings</li>
+              <li>- Create page layout</li>
+              <li>- Units and buildings cost increase formula</li>
+              <li>- Partial achievements system</li>
+              <li>- Units and buildings resource income</li>
+              <li>- A way to display high numbers in shorter and more user-friendly way</li>
+              <li>- Complete achievements system</li>
+              <li>- Make new units and buildings appear on the list over the course of game</li>
+              <li>- Introduce upgrades</li>
+              <li>- Create user interface elements (PARTIAL)</li>
+              <li>- Bring the website online</li>
+            </ul>
+          </div>
+
+          <div class="changelog-item">
+            <h3>TO BE DONE:</h3>
+            <ul id="to-be-done">
+              <li>- Support for older browsers</li>
+              <li>- Cookies saves</li>
+              <li>- Gameplay statistics</li>
+              <li>- User settings</li>
+              <li>- Add Dev changelog on the website.</li>
+              <li>- Make buildings have their functions rather than being idle resource givers.</li>
+              <li>- Make both resources to be used in relation to each other.</li>
+              <li>- Add new resources (?).</li>
+              <li>- Add new units and buildings.</li>
+              <li>- Add bonuses for unlocking achievements.</li>
+              <li>- Add personalisation options for users.</li>
+              <li>- Add more upgrades.</li>
+              <li>- Add more achievements / tweak existing ones.</li>
+              <li>- Make mobile version of the website.</li>
+              <li>- Colony Commander module.</li>
+              <li>- Further improve page layout.</li>
+              <li>- Make numbers generation speed up (1 second refresh rate atm).</li>
+            </ul>
+          </div>
+
+          <div class="changelog-item">
+            <h2 class="changelog-exp">Known bugs</h2>
+            <ul>
+              <li>- Buy all buttons aren't working.</li>
+            </ul>
+          </div>
+          <h2 class="changelog-exp">Changelog</h2>
+
+          <div class="changelog-item">
+            <h3>*Version 0.3.6* September 3rd, 2015</h3>
+            <ul>
+              <li>- Added manual save button and changed the interval of auto save (every 1 minute).<br /> User is notified via message when save takes place.</li>
+              <li>- Added new tab "News" to easier keep track of changelog / known bugs and development status.</li>
+              <li>- Fixed error in some of the achievements. Now all unlocked achievements should increase achievement score.</li>
+            </ul>
+          </div>
+
+          <div class="changelog-item">
+            <h3>*Version 0.3.5a* September 1st, 2015</h3>
+            <ul>
+              <li>- Adjusted cost of energy buildings.</li>
+              <li>- Adjusted cost of upgrades.</li>
+              <li>- Owned upgrades are visually more appealing.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.3.5* September 1st, 2015</h3>
+            <ul>
+              <li>- Fixed buy 5 button.**</li>
+              <li>- Changed background.</li>
+              <li>- Fixes to the code.</li>
+              <li>**Thanks to <a href="https://www.reddit.com/user/Brownprobe">Brownprobe</a> for his help with the formula.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.3.1* August 28th, 2015</h3>
+            <ul>
+              <li>- Fixed unit cost not updating properly.</li>
+              <li>- Fixed unit resource generation.</li>
+              <li>- Some visual tweaking.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.3.0* August 27th, 2015</h3>
+            <ul>
+              <li>- Fixes to the code.</li>
+              <li>- Few new layout elements.</li>
+              <li>- Moved achievements into separate file.</li>
+              <li>- Updated game's logo.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.2.9* August 12th, 2015</h3>
+            <ul>
+              <li>- Introduced upgrades (still needs correct values for pricing and minor fixes).</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.2.7a* August 8th, 2015</h3>
+            <ul>
+              <li>- Changes to the code in preparation for cookie saves functionality.</li>
+              <li>- Code optimization.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.2.7* August 6th, 2015</h3>
+            <ul>
+              <li>- Added elements hiding function (not activated for now, still needs testing).</li>
+              <li>- Code optimization.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.2.6*  August 5th, 2015</h3>
+            <ul>
+              <li>- COMPLETE achievement system.</li>
+              <li>- Added interactive progress bar to visualize accumulated achievement points.</li>
+              <li>- Minor fixes to the code.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.2.5* August 4th, 2015</h3>
+            <ul>
+              <li>- Shortened big numbers to be more user-friendly.</li>
+              <li>- Minor fixes to the code.</li>
+              <li>- Started working on a way to hide elements and make them appear with game's progress.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.2.2* August 3rd, 2015</h3>
+            <ul>
+              <li>- Added upgrades function.</li>
+              <li>- Added upgrades dynamic tubs.</li>
+              <li>- Minor fixes to the code.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.2.1* August 1st, 2015</h3>
+            <ul>
+              <li>- Added more achievements.</li>
+              <li>- Started working on upgrades.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.2.0* July 31st, 2015</h3>
+            <ul>
+              <li>- Started working on "Buy All" function.</li>
+              <li>- Created achievements system (still needs update).</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.1.9* July 30th, 2015</h3>
+            <ul>
+              <li>- Added units and buildings cost increase formula.</li>
+              <li>- Minor fixes to the code. </li>
+              <li>- Added achievements tab.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.1.5* July 29th, 2015</h3>
+            <ul>
+              <li>- Added more GUI elements.</li>
+              <li>- Changed font.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.1.0* July 28th, 2015</h3>
+            <ul>
+              <li>- Created few GUI elements.</li>
+              <li>- Created game's logo.</li>
+              <li>- Added website background.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.0.6* July 27th 2015</h3>
+            <ul>
+              <li>- Optimized the code.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.0.5* July 26th, 2015</h3>
+            <ul>
+              <li>- Added temporary website background.</li>
+              <li>- Added "Buy 1, Buy 5, Buy All" buttons.</li>
+              <li>- Minor fixes to the code.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.0.1*  July 25th, 2015</h3>
+            <ul>
+              <li>- Started the project.</li>
+              <li>- Added initial code.</li>
+              <li>- Created save / load functionality.</li>
+            </ul>
+          </div>
+
+        </div>
       </div>
+      <div id="Game-Save">Game Saved !</div>
     </div>
   </div>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-67022382-1', 'auto');
+    ga('send', 'pageview');
+    </script>
 </body>
 
 </html>
