@@ -62,29 +62,29 @@ var player = {
   pwrGen: {
     name: "Power Generator",
     owned: 0,
-    cost: 100,
-    nextC: 100,
+    cost: 15,
+    nextC: 15,
     generates: 0.5,
   },
   genRoom: {
     name: "Generator Room",
     owned: 0,
-    cost: 500,
-    nextC: 500,
+    cost: 100,
+    nextC: 100,
     generates: 4,
   },
   solPan: {
     name: "Solar Panels",
     owned: 0,
-    cost: 3000,
-    nextC: 3000,
+    cost: 500,
+    nextC: 500,
     generates: 10,
   },
   solPanFarm: {
     name: "Solar Panel Farm",
     owned: 0,
-    cost: 10000,
-    nextC: 10000,
+    cost: 3000,
+    nextC: 3000,
     generates: 40,
   },
   upgrades: {
@@ -197,6 +197,16 @@ var player = {
     one_hundredth: 0
   }
 };
+function hideNotify(){
+  document.getElementById('top-notify').style.display ="none";
+  localStorage.setItem('asavepopup', 'false'); //store state in localStorage
+}
+function checkHidden() {
+    var show = localStorage.getItem('asavepopup');
+    if(show === 'false'){
+         document.getElementById('top-notify').style.display = "none";
+    }
+}
 var progBar = document.getElementsByClassName("progress-bar");
 nums = ['k', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No', 'De', 'UnD', 'DuD', 'TrD', 'QaD', 'QiD', 'SeD', 'SpD', 'OcD', 'NoD'];
 // ================ HTML LOCAL STORAGE SAVE =====================//
@@ -270,22 +280,10 @@ function load_game() {
 //delete save
 function deleteSave() {
   localStorage.removeItem('player');
-  location.reload();
-}
-//Buy One
-function buyOne(building, resource, id) {
-  building.nextC = ((Math.floor(building.cost * Math.pow(1.15, building.owned))));
-  if (building.nextC <= player[resource]) {
-    building.owned++;
-    player[resource] -= building.nextC;
-    document.getElementById(id).innerHTML = suffixy(player[resource], 2);
-    building.nextC = ((Math.floor(building.cost * Math.pow(1.15, building.owned))));
-  } else {
-    console.log("Not enough resources");
-  }
+  localStorage.removeItem('asavepopup');
 }
 //Buy Five
-function BuyFive(building, resource, amountToPurchase, id) { //Send two values, building and amountToPurchase.
+function buyBuilding(building, resource, amountToPurchase, id) { //Send two values, building and amountToPurchase.
   var exponentialIncrease = 1.15; //Used to change the value for rebalancing later.
   var nextCost = 0;
   nextCost = Math.floor((building.cost * Math.pow(exponentialIncrease, building.owned)) * ((Math.pow(exponentialIncrease, amountToPurchase) - 1) / (exponentialIncrease - 1)));
@@ -301,21 +299,15 @@ function BuyFive(building, resource, amountToPurchase, id) { //Send two values, 
   }
 }
 //Buy All
-/* STILL NEEDS SOME WORK ON THE RESOURCE REMOVAL
 function buyAll(building, resource, id) {
   var exponentialIncrease = 1.15;
   var nextCost = 0;
   var toBuy = (log10(((player[resource] / (building.cost * Math.pow(exponentialIncrease, building.owned))) * (exponentialIncrease - 1)) + 1) / log10(exponentialIncrease));
-  //var toRemove = Math.floor((building.cost * Math.pow(exponentialIncrease, building.owned)) * ((Math.pow(exponentialIncrease, toBuy) - 1) / (exponentialIncrease - 1)));
-  if (toBuy <= player[resource]) {
-    //player[resource] -= toRemove;
-    building.owned += parseInt(toBuy);
-    building.nextC = ((Math.floor(building.cost * Math.pow(1.15, building.owned))));
-  }
+  buyBuilding(building, resource, Math.floor(toBuy), id);
 }
 function log10(val) {
   return Math.log(val) / Math.LN10;
-}*/
+}
 
 function buyUpgrade(techcost, energycost, up, amount) {
   if (techcost <= player.tech && energycost <= player.energy) {
@@ -365,37 +357,46 @@ function floor(num) {
 function hideElements(){
   if (player.tech >= 50){
     document.getElementById('andro').style.display = 'block';
+    document.getElementById('andro2').style.display = 'block';
   }
   if (player.tech >= 250){
     document.getElementById('robo').style.display = 'block';
+    document.getElementById('robo2').style.display = 'block';
   }
   if (player.tech >= 500){
     document.getElementById('resLabo').style.display = 'block';
+    document.getElementById('resLabo2').style.display = 'block';
   }
   if (player.tech >= 1000){
     document.getElementById('resFact').style.display = 'block';
+    document.getElementById('resFact2').style.display = 'block';
   }
   if (player.tech >= 2000){
     document.getElementById('robFact').style.display = 'block';
+    document.getElementById('robFact2').style.display = 'block';
   }
   if (player.tech >= 3000){
     document.getElementById('cyberLabo').style.display = 'block';
+    document.getElementById('cyberLabo2').style.display = 'block';
   }
 //energy
 if (player.energy >= 250){
   document.getElementById('pwrgen').style.display = 'block';
+  document.getElementById('pwrgen2').style.display = 'block';
 }
 if (player.energy >= 500){
   document.getElementById('generoom').style.display = 'block';
+  document.getElementById('generoom2').style.display = 'block';
 }
 if (player.energy >= 1000){
   document.getElementById('solarpan').style.display = 'block';
+  document.getElementById('solarpan2').style.display = 'block';
 }
 if (player.energy >= 2000){
   document.getElementById('solarfarm').style.display = 'block';
+  document.getElementById('solarfarm2').style.display = 'block';
 }
 }
-
 function updateTotals() {
   player.tech += ((player.engineer.owned * (player.engineer.generates + player.upgrades.engi5Perc + player.upgrades.engi25Perc)));
   player.tech += ((player.android.owned * (player.android.generates + player.upgrades.andro5Perc + player.upgrades.andro25Perc)));

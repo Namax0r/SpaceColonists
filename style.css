@@ -7,6 +7,9 @@ body {background-image: url('img/moontopright.png'), url('img/moonbotleft.png'),
       background-position: top right, bottom left;
     }
 html *{font-size: 23px; color: white; font-family: Recharge;}
+#top-notify {height: 40px ;background-color: #007df1; width: 1920px;margin-bottom: 5px}
+#top-notify p {float: left;color: white; font-size: 14px; margin-top: 10px; margin-left: 5px}
+#notify-button {background-color: #f1d600;float:right;margin-top: 3px; margin-right: 35px}
 #nick, #nick a {font-size: 15px;}
 #settings a {color: blue;}
 #logo {display: block; margin-left: auto; margin-right: auto;}
@@ -16,15 +19,25 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 #tech, #energy {font-size: 18px;}
 #wrapper {min-height:100%; position:relative;}
 #andro{display:none;}
+#andro2{display:none;}
 #robo{display:none;}
+#robo2{display:none;}
 #resLabo{display:none;}
+#resLabo2{display:none;}
 #resFact{display:none;}
+#resFact2{display:none;}
 #robFact{display:none;}
+#robFact2{display:none;}
 #cyberLabo{display:none;}
+#cyberLabo2{display:none;}
 #pwrgen {display:none;}
+#pwrgen2 {display:none;}
 #generoom {display:none;}
+#generoom2 {display:none;}
 #solarpan {display:none;}
+#solarpan2 {display:none;}
 #solarfarm {display:none;}
+#solarfarm2 {display:none;}
 .container {padding: 0px;}
 #cont-up {margin-top: 100px; margin-bottom: 100px;}
 .tab1 {color:black; border-bottom: 2px solid #5bc436; font-size: 18px;}
