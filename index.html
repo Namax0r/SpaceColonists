@@ -21,20 +21,27 @@
 
 </head>
 
-<body onload="gameLoad(); checkUpgrades()">
-  <p id="nick">Coded by <a href="https://github.com/KoKsMAN" target="_blank">KoKsMAN</a> & <a href="https://github.com/Nak0o0" target="_blank">Nak0o0</a></p>
-  <div id="social-links">
-    <a href="https://www.reddit.com/user/KoKsM4N/" target="_blank">
-      <img src="img/reddit-idle.png" width="48" name="reddit" onmouseover="this.src='img/reddit-hover.png'; reddit.width='55';" onmouseout="this.src='img/reddit-idle.png'; reddit.width='48';" border="0" alt="" />
-    </a>
-    <a href="#">
-      <img src="img/facebook-idle.png" width="48" name="facebook" onmouseover="this.src='img/facebook-hover.png'; facebook.width='55';" onmouseout="this.src='img/facebook-idle.png'; facebook.width='48';" border="0" alt="" />
-    </a>
-    <a href="#">
-      <img src="img/twitter-idle.png" width="48" name="twitter" onmouseover="this.src='img/twitter-hover.png'; twitter.width='55';" onmouseout="this.src='img/twitter-idle.png'; twitter.width='48';" border="0" alt="" />
-    </a>
-  </div>
+<body onload="checkHidden(); gameLoad(); checkUpgrades()">
   <div id="wrapper">
+      <div id="top-notify">
+        <button id="notify-button" type="button" class="btn btn-default" onclick="hideNotify()">Got it!</button>
+        <p>This game uses auto save feature. Your progress is saved automatically each minute. If you are in hurry and can't wait for next auto save, click the "Save Game" button located in "Settings" Tab."</p>
+
+      </div>
+
+    <p id="nick">Coded by <a href="https://github.com/KoKsMAN" target="_blank">KoKsMAN</a> & <a href="https://github.com/Nak0o0" target="_blank">Nak0o0</a></p>
+    <div id="social-links">
+      <a href="https://www.reddit.com/user/KoKsM4N/" target="_blank">
+        <img src="img/reddit-idle.png" width="48" name="reddit" onmouseover="this.src='img/reddit-hover.png'; reddit.width='55';" onmouseout="this.src='img/reddit-idle.png'; reddit.width='48';" border="0" alt="" />
+      </a>
+      <a href="#">
+        <img src="img/facebook-idle.png" width="48" name="facebook" onmouseover="this.src='img/facebook-hover.png'; facebook.width='55';" onmouseout="this.src='img/facebook-idle.png'; facebook.width='48';" border="0" alt="" />
+      </a>
+      <a href="#">
+        <img src="img/twitter-idle.png" width="48" name="twitter" onmouseover="this.src='img/twitter-hover.png'; twitter.width='55';" onmouseout="this.src='img/twitter-idle.png'; twitter.width='48';" border="0" alt="" />
+      </a>
+    </div>
+
     <img id="logo" src="img/SpaceColonistsLogotrans2.png" alt="...">
 
     <div id="resources">
@@ -361,14 +368,14 @@
                       <button type="button" id="engi25Perc" class="btn btn-default" onclick="buyUpgrade(50000, 50000, 'engi25Perc', 0.025)">25% for 50k</button>
                     </div>
                   </div>
-                  <div class="col-md-4">
-                    <span>Android</span>
+                  <div id="andro2" class="col-md-4">
+                    <span >Android</span>
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" id="andro5Perc" class="btn btn-default" onclick="buyUpgrade(100000, 100000, 'andro5Perc', 0.025)">5% for 100k</button>
                       <button type="button" id="andro25Perc" class="btn btn-default" onclick="buyUpgrade(500000, 500000, 'andro25Perc', 0.125)">25% for 500k</button>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div id="robo2" class="col-md-3">
                     <span>Robot</span>
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" id="robot5Perc" class="btn btn-default" onclick="buyUpgrade(1000000, 1000000, 'robot5Perc', 0.2)">5% for 1M</button>
@@ -376,7 +383,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div id="resLabo2" class="row">
                   <div class="col-md-4">
                     <span>Research Lab</span>
                     <div class="btn-group" role="group" aria-label="...">
@@ -384,14 +391,14 @@
                       <button type="button" id="resLab25Perc" class="btn btn-default" onclick="buyUpgrade(50000000, 50000000, 'resLab25Perc', 2.5)">25% for 50M</button>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div id="resFact2" class="col-md-4">
                     <span>Research Facility</span>
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" id="resFact5Perc" class="btn btn-default" onclick="buyUpgrade(100000000, 100000000, 'resFact5Perc', 2)">5% for 100M</button>
                       <button type="button" id="resFact25Perc" class="btn btn-default" onclick="buyUpgrade(500000000, 500000000, 'resFact25Perc', 10)">25% for 500M</button>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div id="robFact2" class="col-md-4">
                     <span>Robotics Factory</span>
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" id="roboFact5Perc" class="btn btn-default" onclick="buyUpgrade(1000000000, 1000000000, 'roboFact5Perc', 5)">5% for 1B</button>
@@ -399,7 +406,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div id="cyberLabo2" class="row">
                   <div class="col-md-4">
                     <span>Cybernetics Lab</span>
                     <div class="btn-group" role="group" aria-label="...">
@@ -419,28 +426,28 @@
                       <button type="button" id="battPck25Perc" class="btn btn-default" onclick="buyUpgrade(50000, 50000, 'battPck25Perc', 100)">25% for 50k</button>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div id="pwrgen2" class="col-md-4">
                     <span>Power Generator</span>
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" id="pwrGen5Perc" class="btn btn-default" onclick="buyUpgrade(100000, 100000, 'pwrGen5Perc', 20)">5% for 100k</button>
                       <button type="button" id="pwrGen25Perc" class="btn btn-default" onclick="buyUpgrade(500000, 500000, 'pwrGen25Perc', 100)">25% for 500k</button>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div id="generoom2" class="col-md-4">
                     <span>Generator Room</span>
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" id="genRoom5Perc" class="btn btn-default" onclick="buyUpgrade(1000000, 1000000, 'genRoom5Perc', 20)">5% for 1M</button>
                       <button type="button" id="genRoom25Perc" class="btn btn-default" onclick="buyUpgrade(5000000, 5000000, 'genRoom25Perc', 100)">5% for 5M</button>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div id="solarpan2" class="col-md-4">
                     <span>Solar Panel</span>
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" id="solPan5Perc" class="btn btn-default" onclick="buyUpgrade(10000000, 10000000, 'solPan5Perc', 20)">5% for 10M</button>
                       <button type="button" id="solPan25Perc" class="btn btn-default" onclick="buyUpgrade(50000000, 50000000, 'solPan25Perc', 100)">5% for 50M</button>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div id="solarfarm2" class="col-md-4">
                     <span>Solar Panel Farm</span>
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" id="solPanFarm5Perc" class="btn btn-default" onclick="buyUpgrade(100000000, 100000000, 'solPanFarm5Perc', 20)">5% for 100M</button>
@@ -926,7 +933,7 @@
           <br />
           <br />
           <p>Press "Delete Save" button to remove save data from local storage.</p>
-          <button type="button" id="Delete" onclick="deleteSave()">Delete Save</button>
+          <button type="button" id="Delete" onclick="deleteSave(); history.go(0)">Delete Save</button>
         </div>
         <!-- ============ NEWS TAB ============ -->
         <div id="news" class="tab-pane fade">
@@ -985,7 +992,8 @@
           <div class="changelog-item">
             <h3>*Version 0.3.6* September 3rd, 2015</h3>
             <ul>
-              <li>- Added manual save button and changed the interval of auto save (every 1 minute).<br /> User is notified via message when save takes place.</li>
+              <li>- Added manual save button and changed the interval of auto save (every 1 minute).
+                <br /> User is notified via message when save takes place.</li>
               <li>- Added new tab "News" to easier keep track of changelog / known bugs and development status.</li>
               <li>- Fixed error in some of the achievements. Now all unlocked achievements should increase achievement score.</li>
             </ul>
@@ -1046,7 +1054,7 @@
             </ul>
           </div>
           <div class="changelog-item">
-            <h3>*Version 0.2.6*  August 5th, 2015</h3>
+            <h3>*Version 0.2.6* August 5th, 2015</h3>
             <ul>
               <li>- COMPLETE achievement system.</li>
               <li>- Added interactive progress bar to visualize accumulated achievement points.</li>
@@ -1121,7 +1129,7 @@
             </ul>
           </div>
           <div class="changelog-item">
-            <h3>*Version 0.0.1*  July 25th, 2015</h3>
+            <h3>*Version 0.0.1* July 25th, 2015</h3>
             <ul>
               <li>- Started the project.</li>
               <li>- Added initial code.</li>
@@ -1135,13 +1143,20 @@
     </div>
   </div>
   <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
     ga('create', 'UA-67022382-1', 'auto');
     ga('send', 'pageview');
-    </script>
+  </script>
 </body>
 
 </html>
