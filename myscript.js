@@ -225,7 +225,7 @@ function gameSaveString(){
 }
 function gameLoadString(){
 		var compressed = document.getElementById('impo-expo').value; // retrieve compressed string
-		var decompressed = window.atob(compressed); // decode compressed string
+		var decompressed = window.atob(compressed); //  decode compressed string
     player = JSON.parse(decompressed); // parse decoded values into player object
 		console.log("Loading finished");
 }

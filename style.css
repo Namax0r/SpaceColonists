@@ -70,7 +70,7 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 .unlocked {background-color: green;}
 #Player-upgrades li, #Tech-upgrades li, #Energy-upgrades li {color: black;}
 ul {list-style-type: none;}
-textarea {resize: none; color:black; font-size: 10px; width: 500px; height: 200px; margin-left: 5px;}
+textarea {resize: none;color:black; font-size: 10px; width: 500px; height: 200px; margin-left: 5px;}
 #Game-Save {left: 50%; right: 50%; color: white; display: none; position: absolute; width: 200px; height: 50px;}
 /* PSEUDO CLASSES */
 .btn:hover {background-color: #A1C436;}
