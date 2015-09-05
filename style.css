@@ -63,6 +63,7 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 #achievements h4 {font-size: 20px;}
 #current-version{text-align: center; color: black; background-color: #F7F7F7;}
 #done li {color: #1aa30c;}
+#to-be-done li {color: #a30c0c;}
 .changelog-item {background-color: #F7F7F7;}
 .changelog-item h3 {text-decoration: underline; font-size: 22px; color:black; font-family: "Arial";font-weight: bold; margin-left: 5px;}
 .changelog-exp {background-image: url('img/achievement3.png');font-size: 30px; color:white; font-family: "Arial"; font-weight: bold; text-align: center; background-color: #F7F7F7;}
