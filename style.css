@@ -1,5 +1,6 @@
 @font-face { font-family: Digital; src: url('fonts/digital.ttf'); }
 @font-face { font-family: Recharge; src: url('fonts/recharge.ttf'); }
+@font-face { font-family: LGot; src: url('fonts/lgot.otf'); }
 html,body{min-height:100%;}
 body {background-image: url('img/moontopright.png'),url('img/bottom.png'), url('img/Stars_Pattern_clip_art_hightt.png'); margin:0; padding:0; height:100%;
       background-repeat: no-repeat, no-repeat, repeat;
@@ -7,11 +8,10 @@ body {background-image: url('img/moontopright.png'),url('img/bottom.png'), url('
       background-position: top right, bottom center;
     }
 html *{font-size: 23px; color: white; font-family: Recharge;}
-#top-notify {height: 40px ;background-color: #007df1; width: 1920px;margin-bottom: 5px}
-#top-notify p {float: left;color: white; font-size: 14px; margin-top: 10px; margin-left: 5px}
-#notify-button {background-color: #f1d600;float:right;margin-top: 3px; margin-right: 35px}
+#top-notify {height: auto ;background-color: #007df1; width: 100%;margin-bottom: 5px;position: relative;overflow: hidden;}
+#top-notify p {color: white; font-size: 14px;float:left; margin-top:10px;margin-left: 5px;position: relative;}
+#notify-button {background-color: #f1d600; margin-right: 35px;margin-top:3px; float:right}
 #nick, #nick a {font-size: 15px;}
-#settings a {color: blue;}
 #logo {display: block; margin-left: auto; margin-right: auto;}
 #social-links {margin-left: 5px; width: 180px; height: 55px;}
 #resources {display: block; position:absolute; left:50%; margin-left:-50px;}
@@ -38,6 +38,7 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 #solarpan2 {display:none;}
 #solarfarm {display:none;}
 #solarfarm2 {display:none;}
+#imgexpsave {width: 100px;}
 .container {padding: 0px;}
 #cont-up {margin-top: 100px; margin-bottom: 100px;padding-bottom: 330px;}
 .tab1 {color:black; border-bottom: 2px solid #5bc436; font-size: 18px;}
@@ -48,7 +49,10 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 .tab-content, .tab-content span, .tab-content h5  {background-color: #E8E8F0; color: black;}
 .tab-pane {color: black;}
 .tab-text, .tab-text span {margin-left: 5px; color: black; font-size: 18px}
-#settings p, #settings button, #achievements p {color: black;}
+#settings p {color: black; font-family: LGot; font-size: 30px; margin-left: 5px;}
+#settings a {color: blue; font-family: LGot; font-size: 30px;}
+#settings button, #achievements p {color: black;}
+#settings span {color: red; margin-left: 5px;}
 #upgrades {background-image: url('img/achievement3.png'); border-bottom: 1px solid #0847b0;}
 #upgrades li {font-size: 18px;}
 #achlist li {margin-bottom: 2px;}
@@ -59,7 +63,6 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 #achievements h4 {font-size: 20px;}
 #current-version{text-align: center; color: black; background-color: #F7F7F7;}
 #done li {color: #1aa30c;}
-#to-be-done li {color: #a30c0c;}
 .changelog-item {background-color: #F7F7F7;}
 .changelog-item h3 {text-decoration: underline; font-size: 22px; color:black; font-family: "Arial";font-weight: bold; margin-left: 5px;}
 .changelog-exp {background-image: url('img/achievement3.png');font-size: 30px; color:white; font-family: "Arial"; font-weight: bold; text-align: center; background-color: #F7F7F7;}
@@ -67,6 +70,7 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 .unlocked {background-color: green;}
 #Player-upgrades li, #Tech-upgrades li, #Energy-upgrades li {color: black;}
 ul {list-style-type: none;}
+textarea {resize: none; color:black; font-size: 10px; width: 500px; height: 200px; margin-left: 5px;}
 #Game-Save {left: 50%; right: 50%; color: white; display: none; position: absolute; width: 200px; height: 50px;}
 /* PSEUDO CLASSES */
 .btn:hover {background-color: #A1C436;}

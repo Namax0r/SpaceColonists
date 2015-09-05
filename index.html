@@ -37,10 +37,10 @@
 
 <body onload="checkHidden(); gameLoad(); checkUpgrades()">
   <div id="wrapper">
-      <div id="top-notify">
-        <button id="notify-button" type="button" class="btn btn-default" onclick="hideNotify()">Got it!</button>
-        <p>This game uses auto save feature. Your progress is saved automatically each minute. If you are in hurry and can't wait for next auto save, click the "Save Game" button located in "Settings" Tab."</p>
-      </div>
+    <div id="top-notify">
+      <p>Your progress is saved automatically each minute. If you are in hurry and can't wait for next auto save, click the "Save Game" button located in "Settings" Tab."</p>
+      <button id="notify-button" type="button" class="btn btn-default" onclick="hideNotify()">Got it!</button>
+    </div>
     <p id="nick">Coded by <a href="https://github.com/KoKsMAN" target="_blank">KoKsMAN</a> & <a href="https://github.com/Nak0o0" target="_blank">Nak0o0</a></p>
     <div id="social-links">
       <a href="https://www.reddit.com/user/KoKsM4N/" target="_blank">
@@ -381,7 +381,7 @@
                     </div>
                   </div>
                   <div id="andro2" class="col-md-4">
-                    <span >Android</span>
+                    <span>Android</span>
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" id="andro5Perc" class="btn btn-default" onclick="buyUpgrade(100000, 100000, 'andro5Perc', 0.025)">5% for 100k</button>
                       <button type="button" id="andro25Perc" class="btn btn-default" onclick="buyUpgrade(500000, 500000, 'andro25Perc', 0.125)">25% for 500k</button>
@@ -936,16 +936,33 @@
         </div>
         <!-- ============ SETTINGS TAB ============ -->
         <div id="settings" class="tab-pane fade">
-          <p id="changelog"><a href="https://github.com/KoKsMAN/Collaborative/blob/master/README.md" target="_blank">Changelog</a></p>
-          <p>Layout resources found on <a href="http://www.freepik.com/">Freepik.</a></p>
+          <p id="changelog">Click here for a full project changelog. <a href="https://github.com/KoKsMAN/Collaborative/blob/master/README.md" target="_blank">Changelog</a></p>
           <br />
           <p>The Game saves progress automatically every 1 minute.</p>
-          <p>Press "Save Game" button to save game if you don't want to wait for auto save.</p>
-          <button type="button" id="Delete" onclick="gameSave()">Save Game</button>
+          <p>Your save data is located in browser's local storage</p>
+          <br />
+          <p>Press "Save Game" button to save game, if you don't want to wait until another auto save.</p>
+          <button type="button" class="btn btn-success" onclick="gameSave()">Save Game</button>
           <br />
           <br />
-          <p>Press "Delete Save" button to remove save data from local storage.</p>
-          <button type="button" id="Delete" onclick="deleteSave(); history.go(0)">Delete Save</button>
+          <span>ALPHA FEATURE</span>
+          <p>You can generate key to safeguard your data or continue progress on different device / computer.</p>
+          <br />
+          <p>To save, press on generate key button and copy the key (Ctrl+c). Keep that key somewhere safe.
+            <br/>
+            <p>To load, paste your key (Ctrl+v) into the text box and click on "Load" button.</p>
+            <textarea id="impo-expo"></textarea>
+            <br/>
+            <input class="btn btn-default" onclick="gameLoadString()" type="submit" value="Load">
+            <button type="button" class="btn btn-default" onclick="gameSaveString()">Generate Key</button>
+            <p>Press "Delete Save" button to remove save data from local storage.</p>
+            <button type="button" class="btn btn-danger" id="Delete" onclick="deleteSave(); history.go(0)">Delete Save</button>
+            <br />
+            <br />
+            <p>We use Google Analytics on our website to collect simple data.
+              <br />This data helps us understand users and improve our game.
+              <br />You can opt-out of Google Analytics by following <a href="https://tools.google.com/dlpage/gaoptout">THIS LINK</a></p>
+            <p>Layout resources found on <a href="http://www.freepik.com/">Freepik.</a></p>
         </div>
         <!-- ============ NEWS TAB ============ -->
         <div id="news" class="tab-pane fade">
@@ -999,7 +1016,7 @@
               <li>- None. </li>
             </ul>
           </div>
-          <h2 class="changelog-exp">Changelog</h2>
+          <h2 class="changelog-exp">Recent Changes, head over to "Settings" tab for full changelog.</h2>
           <div class="changelog-item">
             <h3>*Version 0.3.7* September 4th, 2015</h3>
             <ul>
@@ -1066,100 +1083,11 @@
               <li>- Code optimization.</li>
             </ul>
           </div>
-          <div class="changelog-item">
-            <h3>*Version 0.2.7* August 6th, 2015</h3>
-            <ul>
-              <li>- Added elements hiding function (not activated for now, still needs testing).</li>
-              <li>- Code optimization.</li>
-            </ul>
-          </div>
-          <div class="changelog-item">
-            <h3>*Version 0.2.6* August 5th, 2015</h3>
-            <ul>
-              <li>- COMPLETE achievement system.</li>
-              <li>- Added interactive progress bar to visualize accumulated achievement points.</li>
-              <li>- Minor fixes to the code.</li>
-            </ul>
-          </div>
-          <div class="changelog-item">
-            <h3>*Version 0.2.5* August 4th, 2015</h3>
-            <ul>
-              <li>- Shortened big numbers to be more user-friendly.</li>
-              <li>- Minor fixes to the code.</li>
-              <li>- Started working on a way to hide elements and make them appear with game's progress.</li>
-            </ul>
-          </div>
-          <div class="changelog-item">
-            <h3>*Version 0.2.2* August 3rd, 2015</h3>
-            <ul>
-              <li>- Added upgrades function.</li>
-              <li>- Added upgrades dynamic tubs.</li>
-              <li>- Minor fixes to the code.</li>
-            </ul>
-          </div>
-          <div class="changelog-item">
-            <h3>*Version 0.2.1* August 1st, 2015</h3>
-            <ul>
-              <li>- Added more achievements.</li>
-              <li>- Started working on upgrades.</li>
-            </ul>
-          </div>
-          <div class="changelog-item">
-            <h3>*Version 0.2.0* July 31st, 2015</h3>
-            <ul>
-              <li>- Started working on "Buy All" function.</li>
-              <li>- Created achievements system (still needs update).</li>
-            </ul>
-          </div>
-          <div class="changelog-item">
-            <h3>*Version 0.1.9* July 30th, 2015</h3>
-            <ul>
-              <li>- Added units and buildings cost increase formula.</li>
-              <li>- Minor fixes to the code. </li>
-              <li>- Added achievements tab.</li>
-            </ul>
-          </div>
-          <div class="changelog-item">
-            <h3>*Version 0.1.5* July 29th, 2015</h3>
-            <ul>
-              <li>- Added more GUI elements.</li>
-              <li>- Changed font.</li>
-            </ul>
-          </div>
-          <div class="changelog-item">
-            <h3>*Version 0.1.0* July 28th, 2015</h3>
-            <ul>
-              <li>- Created few GUI elements.</li>
-              <li>- Created game's logo.</li>
-              <li>- Added website background.</li>
-            </ul>
-          </div>
-          <div class="changelog-item">
-            <h3>*Version 0.0.6* July 27th 2015</h3>
-            <ul>
-              <li>- Optimized the code.</li>
-            </ul>
-          </div>
-          <div class="changelog-item">
-            <h3>*Version 0.0.5* July 26th, 2015</h3>
-            <ul>
-              <li>- Added temporary website background.</li>
-              <li>- Added "Buy 1, Buy 5, Buy All" buttons.</li>
-              <li>- Minor fixes to the code.</li>
-            </ul>
-          </div>
-          <div class="changelog-item">
-            <h3>*Version 0.0.1* July 25th, 2015</h3>
-            <ul>
-              <li>- Started the project.</li>
-              <li>- Added initial code.</li>
-              <li>- Created save / load functionality.</li>
-            </ul>
-          </div>
         </div>
       </div>
       <div id="Game-Save">Game Saved !</div>
     </div>
   </div>
 </body>
+
 </html>

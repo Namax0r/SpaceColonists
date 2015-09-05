@@ -217,6 +217,18 @@ function gameSave() {
     $('#Game-Save').delay().fadeIn('slow').delay(2000).fadeOut('slow');
 });
 }
+function gameSaveString(){
+  var string = localStorage.setItem("player", JSON.stringify(player)); //assign sava data to variable
+  var compressed = window.btoa(JSON.stringify(player)); //encode save data
+  document.getElementById('impo-expo').innerHTML = compressed; //send endcoded save data into text area
+  console.log("Saving finished");
+}
+function gameLoadString(){
+		var compressed = document.getElementById('impo-expo').value; // retrieve compressed string
+		var decompressed = window.atob(compressed); // decode compressed string
+    player = JSON.parse(decompressed); // parse decoded values into player object
+		console.log("Loading finished");
+}
 //game load
 function gameLoad() {
   var savegame = JSON.parse(localStorage.getItem("player"));
