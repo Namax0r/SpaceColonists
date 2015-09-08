@@ -1,7 +1,13 @@
 //initialize player data
 var player = {
+  clicks: 0,
+  speed: 2,
   tech: 0,
   energy: 0,
+  commander: {
+    commanderName: "temp",
+    colonyName: "temp",
+  },
   engineer: {
     name: "Engineer",
     owned: 0,
@@ -62,29 +68,29 @@ var player = {
   pwrGen: {
     name: "Power Generator",
     owned: 0,
-    cost: 15,
-    nextC: 15,
+    cost: 100,
+    nextC: 100,
     generates: 0.5,
   },
   genRoom: {
     name: "Generator Room",
     owned: 0,
-    cost: 100,
-    nextC: 100,
+    cost: 500,
+    nextC: 500,
     generates: 4,
   },
   solPan: {
     name: "Solar Panels",
     owned: 0,
-    cost: 500,
-    nextC: 500,
+    cost: 3000,
+    nextC: 3000,
     generates: 10,
   },
   solPanFarm: {
     name: "Solar Panel Farm",
     owned: 0,
-    cost: 3000,
-    nextC: 3000,
+    cost: 10000,
+    nextC: 10000,
     generates: 40,
   },
   upgrades: {
@@ -197,6 +203,36 @@ var player = {
     one_hundredth: 0
   }
 };
+var commanderNamee;
+var colonyNamee;
+function createCharacter(){
+//Ask player for commander and colony names
+if (player.commander.commanderName === "temp") {
+  var commanderNamee = prompt("What is your name, commander ?");
+  player.commander.commanderName = commanderNamee;
+  document.getElementById('commander-name').innerHTML = "Commander:" + " " + commanderNamee;
+} else{
+  document.getElementById('commander-name').innerHTML = "Commander:" + " " + player.commander.commanderName;
+}
+if (player.commander.colonyName === "temp") {
+  var colonyNamee = prompt("What is the name of your colony ?");
+  player.commander.colonyName = colonyNamee;
+  document.getElementById('colony-name').innerHTML = "Colony:" + " " + colonyNamee;
+} else{
+  document.getElementById('colony-name').innerHTML = "Colony:" + " " + player.commander.colonyName;
+}
+}
+function renameCharacter(){
+//Ask player for commander and colony names
+  var commanderNamee = prompt("What is your name, commander ?");
+  player.commander.commanderName = commanderNamee;
+  document.getElementById('commander-name').innerHTML = "Commander:" + " " + commanderNamee;
+  var colonyNamee = prompt("What is the name of your colony ?");
+  player.commander.colonyName = colonyNamee;
+  document.getElementById('colony-name').innerHTML = "Colony:" + " " + colonyNamee;
+  document.getElementById('colony-name').innerHTML = "Colony:" + " " + player.commander.colonyName;
+}
+
 function hideNotify(){
   document.getElementById('top-notify').style.display ="none";
   localStorage.setItem('asavepopup', 'false'); //store state in localStorage
@@ -229,13 +265,17 @@ function gameLoadString(){
     player = JSON.parse(decompressed); // parse decoded values into player object
 		console.log("Loading finished");
 }
-//game load
 function gameLoad() {
   var savegame = JSON.parse(localStorage.getItem("player"));
+  //clicks
+  if (typeof savegame.clicks !== "undefined") player.clicks = savegame.clicks;
+  //FPS
+  if (typeof savegame.speed !== "undefined") player.speed = savegame.speed;
   //Resources
   if (typeof savegame.tech !== "undefined") player.tech = savegame.tech;
   if (typeof savegame.energy !== "undefined") player.energy = savegame.energy;
   //Units Tech
+  if (typeof savegame.commander !== "undefined") player.commander = savegame.commander;
   if (typeof savegame.engineer !== "undefined") player.engineer = savegame.engineer;
   if (typeof savegame.android !== "undefined") player.android = savegame.android;
   if (typeof savegame.robot !== "undefined") player.robot = savegame.robot;
@@ -254,6 +294,8 @@ function gameLoad() {
   //Upgrades
   if (typeof savegame.upgrades !== "undefined") player.upgrades = savegame.upgrades;
 }
+//game load
+
 
 // ================ COOKIE SAVE =====================//
 /*function set_cookie(cookie_name,value) {
@@ -305,7 +347,7 @@ function buyBuilding(building, resource, amountToPurchase, id) { //Send two valu
     player[resource] -= nextCost; // removes the resource used to purchase the building
     document.getElementById(id).innerHTML = suffixy(player[resource], 2); // updates the amount of resource on the screen.
     building.nextC = ((Math.floor(building.cost * Math.pow(1.15, building.owned)))); //displays cost of next purchase
-    console.log(nextCost);
+    //console.log(nextCost);
   } else {
     console.log("Not enough resources");
   }
@@ -322,7 +364,7 @@ function log10(val) {
 }
 
 function buyUpgrade(techcost, energycost, up, amount) {
-  if (techcost <= player.tech && energycost <= player.energy) {
+  if (techcost <= player.tech && energycost <= player.energy && player.upgrades[up] === 0) {
     player.tech -= techcost;
     player.energy -= energycost;
     player.upgrades[up] = amount;
@@ -341,7 +383,7 @@ function backgroundChange() {
 }
 
 function getResource(player, resource, amount) {
-  player[resource] += amount;
+  player[resource] += amount / player.speed;
 }
 
 function prettify(input) {
@@ -410,19 +452,19 @@ if (player.energy >= 2000){
 }
 }
 function updateTotals() {
-  player.tech += ((player.engineer.owned * (player.engineer.generates + player.upgrades.engi5Perc + player.upgrades.engi25Perc)));
-  player.tech += ((player.android.owned * (player.android.generates + player.upgrades.andro5Perc + player.upgrades.andro25Perc)));
-  player.tech += ((player.robot.owned * (player.robot.generates + player.upgrades.robot5Perc + player.upgrades.robot25Perc)));
-  player.tech += ((player.resLab.owned * (player.resLab.generates + player.upgrades.resLab5Perc + player.upgrades.resLab25Perc)));
-  player.tech += ((player.resFac.owned * (player.resFac.generates + player.upgrades.resFact5Perc + player.upgrades.resFact25Perc)));
-  player.tech += ((player.roboticsFact.owned * (player.roboticsFact.generates + player.upgrades.roboFact5Perc + player.upgrades.roboFact25Perc)));
-  player.tech += ((player.cyberLab.owned * (player.cyberLab.generates + player.upgrades.cybLab5Perc + player.upgrades.cybLab25Perc)));
+  player.tech += ((player.engineer.owned * (player.engineer.generates + player.upgrades.engi5Perc + player.upgrades.engi25Perc) / player.speed));
+  player.tech += ((player.android.owned * (player.android.generates + player.upgrades.andro5Perc + player.upgrades.andro25Perc) / player.speed));
+  player.tech += ((player.robot.owned * (player.robot.generates + player.upgrades.robot5Perc + player.upgrades.robot25Perc) / player.speed));
+  player.tech += ((player.resLab.owned * (player.resLab.generates + player.upgrades.resLab5Perc + player.upgrades.resLab25Perc) / player.speed));
+  player.tech += ((player.resFac.owned * (player.resFac.generates + player.upgrades.resFact5Perc + player.upgrades.resFact25Perc) / player.speed));
+  player.tech += ((player.roboticsFact.owned * (player.roboticsFact.generates + player.upgrades.roboFact5Perc + player.upgrades.roboFact25Perc) / player.speed));
+  player.tech += ((player.cyberLab.owned * (player.cyberLab.generates + player.upgrades.cybLab5Perc + player.upgrades.cybLab25Perc) / player.speed));
   //Energy
-  player.energy += ((player.battPack.owned * (player.battPack.generates + player.upgrades.battPck5Perc + player.upgrades.battPck25Perc)));
-  player.energy += ((player.pwrGen.owned * (player.pwrGen.generates + player.upgrades.pwrGen5Perc + player.upgrades.pwrGen25Perc)));
-  player.energy += ((player.genRoom.owned * (player.genRoom.generates + player.upgrades.genRoom5Perc + player.upgrades.genRoom25Perc)));
-  player.energy += ((player.solPan.owned * (player.solPan.generates + player.upgrades.solPan5Perc + player.upgrades.solPan25Perc)));
-  player.energy += ((player.solPanFarm.owned * (player.solPanFarm.generates + player.upgrades.solPanFarm5Perc + player.upgrades.solPanFarm25Perc)));
+  player.energy += ((player.battPack.owned * (player.battPack.generates + player.upgrades.battPck5Perc + player.upgrades.battPck25Perc) / player.speed));
+  player.energy += ((player.pwrGen.owned * (player.pwrGen.generates + player.upgrades.pwrGen5Perc + player.upgrades.pwrGen25Perc) / player.speed));
+  player.energy += ((player.genRoom.owned * (player.genRoom.generates + player.upgrades.genRoom5Perc + player.upgrades.genRoom25Perc) / player.speed));
+  player.energy += ((player.solPan.owned * (player.solPan.generates + player.upgrades.solPan5Perc + player.upgrades.solPan25Perc) / player.speed));
+  player.energy += ((player.solPanFarm.owned * (player.solPanFarm.generates + player.upgrades.solPanFarm5Perc + player.upgrades.solPanFarm25Perc) / player.speed));
   //Generating
   document.getElementsByClassName('Generating')[0].innerHTML = prettify((player.engineer.owned * (player.engineer.generates + player.upgrades.engi5Perc + player.upgrades.engi25Perc)));
   document.getElementsByClassName('Generating')[1].innerHTML = prettify((player.android.owned * (player.android.generates + player.upgrades.andro5Perc + player.upgrades.andro25Perc)));
@@ -546,15 +588,13 @@ window.setInterval(function() {
 
 window.setInterval(function() {
   updateTotals();
+  //save_game();
   getResource(player, 'tech' , 1);
   getResource(player, 'energy', 1);
-  hideElements();
-  checkAchievements ();
-  //save_game();
-}, 1000);
 
-window.setInterval(function() {
-  //console.log("I'm working Too");
+    document.getElementById('Tech').innerHTML = suffixy(player.tech, 1);
+    document.getElementById('Energy').innerHTML = suffixy(player.energy, 1);
+
   // Tech
   document.getElementById('Engineers').innerHTML = player.engineer.owned;
   document.getElementById('Androids').innerHTML = player.android.owned;
@@ -569,16 +609,14 @@ window.setInterval(function() {
   document.getElementById('genRoom').innerHTML = player.genRoom.owned;
   document.getElementById('solPan').innerHTML = player.solPan.owned;
   document.getElementById('solPanFarm').innerHTML = player.solPanFarm.owned;
+}, 1000 / player.speed);
+
+window.setInterval(function() {
+  //console.log("I'm working Too");
+
   //Cash
-  if (player.tech <= 1000) {
-    document.getElementById('Tech').innerHTML = prettify(player.tech);
-  } else {
-    document.getElementById('Tech').innerHTML = suffixy(player.tech, 1);
-  }
-  if (player.energy <= 1000) {
-    document.getElementById('Energy').innerHTML = prettify(player.energy);
-  } else {
-    document.getElementById('Energy').innerHTML = suffixy(player.energy, 1);
-  }
+checkAchievements ();
+hideElements();
 //  checkUpgrades();
-}, 100);
+createCharacter();
+}, 3000);
