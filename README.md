@@ -1,7 +1,6 @@
 ![alt text](http://imgur.com/M7X5T0Q.png)
 
-                                      *Current Version 0.3.7
-
+                                      *Current Version 0.3.9
 ___
 
 <em> Space Colonists is a java script incremental game prototype. </em>
@@ -25,6 +24,8 @@ ___
 | ✓ Create user interface elements (PARTIAL)|
 |  [✓ Bring the website online](http://koksman.github.io/SpaceColonists/)|
 | ✓ Add Dev changelog on the website.|
+| ✓ Make numbers generation speed up.|
+| ✓ Colony Commander module.(PARTIAL)|
 | |
 | TO BE DONE |
 | |
@@ -41,21 +42,35 @@ ___
 | ✗ Add more upgrades|
 | ✗ Add more achievements / tweak existing ones.|
 | ✗ Make mobile version of the website.|
-| ✗ Colony Commander module.|
+| ✗ Colony Commander module.(Complete)||
 | ✗ Further improve page layout.|
-| ✗ Make numbers generation speed up (1 second refresh rate atm).|
 
 |KNOWN BUGS|
 | ------------- |
-|☠ Currently none |
-
-
-
+|☠ None |
 
 
 
 #### **_Change Log:_** ####
-
+    *Version 0.3.9
+     8 September 2015
+      -Fixed bug where player could buy the same upgrade twice.
+      -Adjusted Energy buildings cost.
+      -Added simple character creator. (First part of planned commander module).
+      -Introduced number generation accelerator. (Still needs correct implementation. Locked and 2nd gear atm).
+      -Replaced social buttons with new ones.
+      -Rempoved Twitter and Facebook buttons (no official accounts yet).
+      -Changes to the settings tab.
+      -Added user statistics. (Only mouse clicks as of now).
+      -Added contact tab.
+___
+    *Version 0.3.8
+     5 September 2015
+      - Added option to import / export save data via key.
+      - Fixed horizontal scroll bar bug.
+      - Auto save reminder should scale with window width now.
+      - Small visual changes and tweaks.
+  ___
     *Version 0.3.7
      4 September 2015
       -Buy all button has been fixed
