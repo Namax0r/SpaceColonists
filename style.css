@@ -6,6 +6,7 @@ body {background-image: url('img/moontopright.png'),url('img/bottom.png'), url('
       background-repeat: no-repeat, no-repeat, repeat;
       background-size: 200px, 1000px, 800px;
       background-position: top right, bottom center;
+      /*background-attachment:fixed;*/
     }
 html *{font-size: 23px; color: white; font-family: Recharge;}
 #top-notify {height: auto ;background-color: #007df1; width: 100%;margin-bottom: 5px;position: relative;overflow: hidden;}
@@ -50,12 +51,13 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 .tab-pane {color: black;}
 .tab-text, .tab-text span {margin-left: 5px; color: black; font-size: 18px}
 #settings p {color: black; font-family: LGot; font-size: 30px; margin-left: 5px;}
-#settings a {color: blue; font-family: LGot; font-size: 30px;}
 #settings button, #achievements p {color: black;}
-#settings span {color: red; margin-left: 5px;}
+#settings span {color:red; margin-right: 5px;}
 #upgrades {background-image: url('img/achievement3.png'); border-bottom: 1px solid #0847b0;}
 #upgrades li {font-size: 18px;}
+#settings ul {background-image: url('img/achievement3.png');font-size: 18px;}
 #achlist li {margin-bottom: 2px;}
+#stats {color: black; padding-top: 5px; padding-bottom: 5px;}
 #achievements>p {text-align: center;}
 #achievements li, h4 {color: black;}
 #achievements li {margin-bottom: 2px; font-size: 18px;}
@@ -81,7 +83,9 @@ textarea {resize: none;color:black; font-size: 10px; width: 500px; height: 200px
 #settingsbtn:hover {background-color: #E8930C; color: black;}
 #achbtn:hover {background-color: #cc0ce8; color: black;}
 #newsbtn:hover {background-color: #e80c26; color: black;}
+#settings li:hover {background-color:black;}
 #upgrades a:hover {color:black;}
+#settings a:hover {color:black;}
 ul:hover {color: black;}
 .glyphicon {color: #808080;}
 .upgrade-unlocked {width: 90px; height: 90px; background-image: url('img/hexbtn90.png'); margin-left: 30px;}
