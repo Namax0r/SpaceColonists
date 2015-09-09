@@ -19,6 +19,7 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 #Tech, #Energy {font-family: Digital;}
 #tech, #energy {font-size: 18px;}
 #wrapper {min-height:100%; position:relative;}
+#changes{color:red; font-size: 15px; text-align: center;}
 #andro{display:none;}
 #andro2{display:none;}
 #robo{display:none;}
