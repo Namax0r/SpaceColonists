@@ -10,6 +10,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="myscript.js"></script>
   <script type="text/javascript" src="achievements.js"></script>
+
   <!-- Dynamic Tabs controller -->
   <script>
     $(document).ready(function() {
@@ -23,8 +24,35 @@
     $(document).click(function(e) {
       if (e.button === 0) {
         player.clicks++;
-        document.getElementById('mouse-clicks').innerHTML = player.clicks;
       }
+    });
+  </script>
+ <!--<script type="text/javascript">
+    $(document).ready(function() {
+      $('#content').click(function() {
+        $('#content').animate({
+          top: "0px"
+        }, 500).delay(3000);
+      });
+      $('#content').click(function() {
+        $('#content').animate({
+          top: "-60px"
+        }, 500);
+      });
+    });
+  </script>-->
+  <script>
+    $(document).ready(function() {
+      $("first").change(function() {
+        alert("The text has been changed.");
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      setTimeout(function() {
+        $('body').addClass('loaded');
+      }, 3000);
     });
   </script>
   <script>
@@ -42,1121 +70,2004 @@
     ga('create', 'UA-67022382-1', 'auto');
     ga('send', 'pageview');
   </script>
+
 </head>
 
-<body onload="checkHidden(); gameLoad(); checkUpgrades(); ">
-  <div id="wrapper">
+<body onload="gameLoad(); checkHidden(); checkUpgrades(); ">
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+  <div class="wrapper">
     <div id="top-notify">
       <p>Your progress is saved automatically each minute. If you are in hurry and can't wait for next auto save, click the "Save Game" button located in "Settings" Tab."</p>
       <button id="notify-button" type="button" class="btn btn-default" onclick="hideNotify()">Got it!</button>
     </div>
-    <p id="nick">Coded by <a href="https://github.com/KoKsMAN" target="_blank">KoKsMAN</a> & <a href="https://github.com/Nak0o0" target="_blank">Nak0o0</a></p>
-    <div id="social-links">
-      <a href="https://www.reddit.com/r/incremental_games/comments/3j7j2v/space_colonists_my_first_take_on_js_incremental/" target="_blank">
-        <img src="http://i.imgur.com/qisGX0g.png" width="48" name="reddit" onmouseover="this.src='http://i.imgur.com/CdajtWc.png'; reddit.width='55';" onmouseout="this.src='http://i.imgur.com/qisGX0g.png'; reddit.width='48';" border="0" alt="" />
-      </a>
-      <a href="https://github.com/KoKsMAN" target="_blank">
-        <img src="http://i.imgur.com/ssZx6dy.png" width="48" name="github" onmouseover="this.src='http://i.imgur.com/KeOAbMp.png'; github.width='55';" onmouseout="this.src='http://i.imgur.com/ssZx6dy.png'; github.width='48';" border="0" alt="" />
-      </a>
-    </div>
-    <h3 id="changes">The game is undergoing serious changes. There will be no updates for few days. Expect some nice things soon !<h3>
     <img id="logo" src="img/SpaceColonistsLogotrans2.png" alt="...">
+
     <div id="resources">
-      <img src="img/honecomb2transparent.png" alt="...">:
+      <img class="currency" src="img/credits.png" alt="Credits"> :
+      <span id="Credits"></span>
+      <br />
+      <img class="currency" src="img/honecomb2transparent.png" alt="Tech"> :
       <span id="Tech"></span>
       <br />
-      <img src="img/energytransparentnormal.png" alt="...">:
+      <img class="currency" src="img/energytransparentnormal.png" alt="Energy"> :
       <span id="Energy"></span>
+      <br />
+      <img class="currency" src="img/uraore.png" alt="Uranium"> :
+      <span id="Uranium"></span>
+      <br />
+      <img class="currency" src="img/powerbalance.png" alt="Power Balance"> :
+      <span id="power-balance"></span>
     </div>
-
     <div id="cont-up" class="container">
       <h2 id="commander-name"></h2>
-      <h2 id="colony-name">
-        <h2>
-          <ul class="nav nav-tabs">
-            <li class="active">
-              <a id="techbtn" href="#tech">
-                <img src="img/honecombgray.png" width="32" alt="..."> Tech</a>
-            </li>
-            <li>
-              <a id="energybtn" href="#energy">
-                <img src="img/energygray.png" width="32" alt="..."> Energy</a>
-            </li>
-            <li>
-              <a id="upgradesbtn" href="#upgrades">
-                <span class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span> Upgrades</a>
-            </li>
-            <li>
-              <a id="achbtn" href="#achievements">
-                <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Achievements</a>
-            </li>
-            <li>
-              <a id="settingsbtn" href="#settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</a>
-            </li>
-            <li>
-              <a id="newsbtn" href="#news">
-                <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> News</a>
-            </li>
+      <h2 id="colony-name"></h2>
+
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a id="staffbtn" href="#staff">
+            <img src="img/creditsgray.png" width="32" alt="..."> Staff</a>
+        </li>
+        <li>
+          <a id="techbtn" href="#tech">
+            <img src="img/honecombgray.png" width="32" alt="..."> Tech</a>
+        </li>
+        <li>
+          <a id="energybtn" href="#energy">
+            <img src="img/energygray.png" width="32" alt="..."> Energy</a>
+        </li>
+        <li>
+          <a id="uraniumbtn" href="#uranium">
+            <img src="img/uraoregray.png" width="32" alt="..."> Uranium</a>
+        </li>
+        <li>
+          <a id="upgradesbtn" href="#upgrades">
+            <span class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span> Upgrades</a>
+        </li>
+        <li class="dropdown">
+          <a id="settingsbtn" href="#" data-toggle="dropdown" class="dropdown-toggle"> Settings <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a id="#Save-Tab" href="#Save-Tab"> Save Settings</a></li>
+            <li><a id="#Site-Tab" href="#Site-Tab"> Site Settings</a></li>
+            <li><a id="#Statistics-Tab" href="#Statistics-Tab"> Statistics</a></li>
+            <li><a id="#Contact-Tab" href="#Contact-Tab"> Contact</a></li>
+            <li><a id="#Credits-Tab" href="#Credits-Tab"> Credits</a></li>
+            <li><a id="#achbtn" href="#achievements"> Achievements</a></li>
+            <li><a id="#Credits-Tab" href="#news"> News</a></li>
           </ul>
+        </li>
+      </ul>
 
-          <div class="tab-content">
-            <!-- ============ TECH TAB =========== = -->
-            <div id="tech" class="tab-pane fade in active">
-              <div class="tab1" id="engi">
-                <div class="tab-text">
-                  Engineers:
-                  <span id="Engineers"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost">15</span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.engineer, 'tech', 1, 'Tech')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.engineer, 'tech', 5, 'Tech')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.engineer, 'tech', 'Tech')">Buy All</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab1" id="andro">
-                <div class="tab-text">
-                  Androids:
-                  <span id="Androids"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost"></span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.android, 'tech', 1, 'Tech')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.android, 'tech', 5, 'Tech')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.android, 'tech', 'Tech')">Buy All</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab1" id="robo">
-                <div class="tab-text">
-                  Robots:
-                  <span id="Robot"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost"></span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.robot, 'tech', 1, 'Tech')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.robot, 'tech', 5, 'Tech')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.robot, 'tech', 'Tech')">Buy All</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab1" id="resLabo">
-                <div class="tab-text">
-                  Research Labs:
-                  <span id="resLab"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost"></span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.resLab, 'tech', 1, 'Tech')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.resLab, 'tech', 5, 'Tech')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.resLab, 'tech', 'Tech')">Buy All</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab1" id="resFact">
-                <div class="tab-text">
-                  Research Facility:
-                  <span id="resFac"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost"></span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.resFac, 'tech', 1, 'Tech')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.resFac, 'tech', 5, 'Tech')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.resFac, 'tech', 'Tech')">Buy All</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab1" id="robFact">
-                <div class="tab-text">
-                  Robotics Factory:
-                  <span id="roboticsFact"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost"></span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.roboticsFact, 'tech', 1, 'Tech')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.roboticsFact, 'tech', 5, 'Tech')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.roboticsFact, 'tech', 'Tech')">Buy All</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab1" id="cyberLabo">
-                <div class="tab-text">
-                  Cybernetics Lab:
-                  <span id="cyberLab"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost"></span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.cyberLab, 'tech', 1, 'Tech')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.cyberLab, 'tech', 5, 'Tech')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.cyberLab, 'tech', 'Tech')">Buy All</button>
-                  </div>
-                </div>
-              </div>
+      <div class="tab-content">
+        <!-- ============ STAFF TAB ============= -->
+        <div id="staff" class="tab-pane fade in active">
+          <div class="tab1">
+            <div class="tab-text">
+              Colonists:
+              <span id="colonist"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost">15</span> Credits
             </div>
-            <!-- ============ ENERGY TAB ============ -->
-            <div id="energy" class="tab-pane fade">
-              <div class="tab2">
-                <div class="tab-text">
-                  Battery Packs:
-                  <span id="battPack"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost"></span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.battPack, 'energy', 1, 'Energy')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.battPack, 'energy', 5, 'Energy')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.battPack, 'energy', 'Energy')">Buy All</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab2" id="pwrgen">
-                <div class="tab-text">
-                  Power Generators:
-                  <span id="pwrGen"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost"></span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.pwrGen, 'energy', 1, 'Energy')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.pwrGen, 'energy', 5, 'Energy')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.pwrGen, 'energy', 'Energy')">Buy All</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab2" id="generoom">
-                <div class="tab-text">
-                  Generator Rooms:
-                  <span id="genRoom"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost"></span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.genRoom, 'energy', 1, 'Energy')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.genRoom, 'energy', 5, 'Energy')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.genRoom, 'energy', 'Energy')">Buy All</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab2" id="solarpan">
-                <div class="tab-text">
-                  Solar Panels:
-                  <span id="solPan"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost"></span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.solPan, 'energy', 1, 'Energy')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.solPan, 'energy', 5, 'Energy')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.solPan, 'energy', 'Energy')">Buy All</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab2" id="solarfarm">
-                <div class="tab-text">
-                  Solar Panel Farm:
-                  <span id="solPanFarm"></span>
-                  <br /> Generating:
-                  <span class="Generating"></span>
-                  <br /> Cost:
-                  <span class="Cost"></span>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.solPanFarm, 'energy', 1, 'Energy')">Buy 1</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyBuilding(player.solPanFarm, 'energy', 5, 'Energy')">Buy 5</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" onclick="buyAll(player.solPanFarm, 'energy', 'Energy')">Buy All</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- ============ UPGRADES TAB ============ -->
-            <div id="upgrades" class="tab-pane fade">
-              <div class="container">
-                <ul class="nav nav-tabs">
-                  <li>
-                    <a id="#Player-upgrades" href="#Player-upgrades"> Player</a>
-                  </li>
-                  <li>
-                    <a id="#Tech-upgrades" href="#Tech-upgrades"> Tech</a>
-                  </li>
-                  <li>
-                    <a id="#Energy-upgrades" href="#Energy-upgrades"> Energy</a>
-                  </li>
-                </ul>
-                <div class="tab-content">
-                  <div id="Player-upgrades" class="tab-pane fade in active">
-                    <h5>UNDER CONSTRUCTION</h5>
-                  </div>
-
-                  <div id="Tech-upgrades" class="tab-pane fade">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <span>Engineer</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="engi5Perc" class="btn btn-default" onclick="buyUpgrade(10000, 10000, 'engi5Perc', 0.005)">5% for 10k</button>
-                          <button type="button" id="engi25Perc" class="btn btn-default" onclick="buyUpgrade(50000, 50000, 'engi25Perc', 0.025)">25% for 50k</button>
-                        </div>
-                      </div>
-                      <div id="andro2" class="col-md-4">
-                        <span>Android</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="andro5Perc" class="btn btn-default" onclick="buyUpgrade(100000, 100000, 'andro5Perc', 0.025)">5% for 100k</button>
-                          <button type="button" id="andro25Perc" class="btn btn-default" onclick="buyUpgrade(500000, 500000, 'andro25Perc', 0.125)">25% for 500k</button>
-                        </div>
-                      </div>
-                      <div id="robo2" class="col-md-3">
-                        <span>Robot</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="robot5Perc" class="btn btn-default" onclick="buyUpgrade(1000000, 1000000, 'robot5Perc', 0.2)">5% for 1M</button>
-                          <button type="button" id="robot25Perc" class="btn btn-default" onclick="buyUpgrade(5000000, 5000000, 'robot25Perc', 1)">25% for 5M</button>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="resLabo2" class="row">
-                      <div class="col-md-4">
-                        <span>Research Lab</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="resLab5Perc" class="btn btn-default" onclick="buyUpgrade(10000000, 10000000, 'resLab5Perc', 0.5)">5% for 10M</button>
-                          <button type="button" id="resLab25Perc" class="btn btn-default" onclick="buyUpgrade(50000000, 50000000, 'resLab25Perc', 2.5)">25% for 50M</button>
-                        </div>
-                      </div>
-                      <div id="resFact2" class="col-md-4">
-                        <span>Research Facility</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="resFact5Perc" class="btn btn-default" onclick="buyUpgrade(100000000, 100000000, 'resFact5Perc', 2)">5% for 100M</button>
-                          <button type="button" id="resFact25Perc" class="btn btn-default" onclick="buyUpgrade(500000000, 500000000, 'resFact25Perc', 10)">25% for 500M</button>
-                        </div>
-                      </div>
-                      <div id="robFact2" class="col-md-4">
-                        <span>Robotics Factory</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="roboFact5Perc" class="btn btn-default" onclick="buyUpgrade(1000000000, 1000000000, 'roboFact5Perc', 5)">5% for 1B</button>
-                          <button type="button" id="roboFact25Perc" class="btn btn-default" onclick="buyUpgrade(5000000000, 5000000000, 'roboFact25Perc', 25)">25% for 5B</button>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="cyberLabo2" class="row">
-                      <div class="col-md-4">
-                        <span>Cybernetics Lab</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="cybLab5Perc" class="btn btn-default" onclick="buyUpgrade(10000000000, 10000000000, 'cybLab5Perc', 20)">5% for 10B</button>
-                          <button type="button" id="cybLab25Perc" class="btn btn-default" onclick="buyUpgrade(50000000000, 50000000000, 'cybLab25Perc', 100)">25% for 50B</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div id="Energy-upgrades" class="tab-pane fade">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <span>Battery Pack</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="battPck5Perc" class="btn btn-default" onclick="buyUpgrade(10000, 10000, 'battPck5Perc', 20)">5% for 10k</button>
-                          <button type="button" id="battPck25Perc" class="btn btn-default" onclick="buyUpgrade(50000, 50000, 'battPck25Perc', 100)">25% for 50k</button>
-                        </div>
-                      </div>
-                      <div id="pwrgen2" class="col-md-4">
-                        <span>Power Generator</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="pwrGen5Perc" class="btn btn-default" onclick="buyUpgrade(100000, 100000, 'pwrGen5Perc', 20)">5% for 100k</button>
-                          <button type="button" id="pwrGen25Perc" class="btn btn-default" onclick="buyUpgrade(500000, 500000, 'pwrGen25Perc', 100)">25% for 500k</button>
-                        </div>
-                      </div>
-                      <div id="generoom2" class="col-md-4">
-                        <span>Generator Room</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="genRoom5Perc" class="btn btn-default" onclick="buyUpgrade(1000000, 1000000, 'genRoom5Perc', 20)">5% for 1M</button>
-                          <button type="button" id="genRoom25Perc" class="btn btn-default" onclick="buyUpgrade(5000000, 5000000, 'genRoom25Perc', 100)">5% for 5M</button>
-                        </div>
-                      </div>
-                      <div id="solarpan2" class="col-md-4">
-                        <span>Solar Panel</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="solPan5Perc" class="btn btn-default" onclick="buyUpgrade(10000000, 10000000, 'solPan5Perc', 20)">5% for 10M</button>
-                          <button type="button" id="solPan25Perc" class="btn btn-default" onclick="buyUpgrade(50000000, 50000000, 'solPan25Perc', 100)">5% for 50M</button>
-                        </div>
-                      </div>
-                      <div id="solarfarm2" class="col-md-4">
-                        <span>Solar Panel Farm</span>
-                        <div class="btn-group" role="group" aria-label="...">
-                          <button type="button" id="solPanFarm5Perc" class="btn btn-default" onclick="buyUpgrade(100000000, 100000000, 'solPanFarm5Perc', 20)">5% for 100M</button>
-                          <button type="button" id="solPanFarm25Perc" class="btn btn-default" onclick="buyUpgrade(500000000, 500000000, 'solPanFarm25Perc', 100)">25% for 500M</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- tab content -->
-              </div>
-            </div>
-            <!-- ============ ACHIEVEMENTS TAB ============ -->
-            <div id="achievements" class="tab-pane fade">
-              <p>CURRENT POINTS:
-                <span id="points">0</span>
-              </p>
-              <div class="progress progress-striped">
-                <div id="ach-bar" class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-                  <span id="ach-counter" class="sr-only">60% Complete</span>
-                </div>
-              </div>
-              <!--Tech-->
-
-              <h5>Tech</h5>
-              <div class="media">
-                <div id="first" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Collect 100 Tech</h4>
-                  <p class="media-para">A first step in the new world.</p>
-                </div>
-              </div>
-              <div class="media">
-                <div id="second" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Collect 10.000 Tech</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="third" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Collect 100.000 Tech</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fourth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Collect 1.000.000 Tech</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fifth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Collect 50.000.000 Tech</h4>
-                </div>
-              </div>
-
-              <h5>Energy</h5>
-              <div class="media">
-                <div id="sixth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Collect 1.000 Energy</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="seventh" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Collect 10.000 Energy</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="eighth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Collect 100.000 Energy</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="nineth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Collect 1.000.000 Energy</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="tenth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Collect 50.000.000 Energy</h4>
-                </div>
-              </div>
-
-              <h5>Engineers</h5>
-              <div class="media">
-                <div id="eleventh" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 1 engineer</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="twelfth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 500 engineers</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="thirteenth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 1.000 engineers</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fourteenth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 5.000 engineers</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fifteenth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 10.000 engineers</h4>
-                </div>
-              </div>
-
-              <h5>Androids</h5>
-              <div class="media">
-                <div id="sixteenth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 5 androids</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="seventeenth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 400 androids</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="eighteenth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 900 androids</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="nineteenth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 4.000 androids</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="twentieth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 9.000 androids</h4>
-                </div>
-              </div>
-
-              <h5>Robots</h5>
-              <div class="media">
-                <div id="twenty_first" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 10 robots</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="twenty_second" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 450 robots</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="twenty_third" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 950 robots</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="twenty_fourth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 4.500 robots</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="twenty_fifth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 9.500 robots</h4>
-                </div>
-              </div>
-
-              <h5>Research Lab</h5>
-              <div class="media">
-                <div id="twenty_sixth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 50 Research Labs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="twenty_seventh" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 700 Research Labs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="twenty_eighth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 1.300 Research Labs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="twenty_nineth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 6.000 Research Labs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="thirtieth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 10.000 Research Labs</h4>
-                </div>
-              </div>
-
-              <h5>Research Facility</h5>
-              <div class="media">
-                <div id="thirty_first" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 40 Research Facilities</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="thirty_second" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 600 Research Facilities</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="thirty_third" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 1.000 Research Facilities</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="thirty_fourth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 5.000 Research Facilities</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="thirty_fifth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 10.000 Research Facilities</h4>
-                </div>
-              </div>
-
-              <h5>Robotics Factory</h5>
-              <div class="media">
-                <div id="thirty_sixth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 60 Robotics Factories</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="thirty_seventh" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 600 Robotics Factories</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="thirty_eighth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 1.200 Robotics Factories</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="thirty_nineth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 5.500 Robotics Factories</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fortieth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 10.000 Robotics Factories</h4>
-                </div>
-              </div>
-
-              <h5>Cybernetics Lab</h5>
-              <div class="media">
-                <div id="forty_first" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 80 Cybernetics Labs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="forty_second" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 800 Cybernetics Labs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="forty_third" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 1.600 Cybernetics Labs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="forty_fourth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 6.000 Cybernetics Labs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="forty_fifth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 10.000 Cybernetics Labs</h4>
-                </div>
-              </div>
-
-              <!--Energy-->
-              <h5>Battery Pack</h5>
-              <div class="media">
-                <div id="forty_sixth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 1 Battery Packs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="forty_seventh" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 500 Battery Packs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="forty_eighth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 1000 Battery Packs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="forty_nineth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 5000 Battery Packs</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fiftieth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 10.000 Battery Packs</h4>
-                </div>
-              </div>
-
-              <h5>Power Generator</h5>
-              <div class="media">
-                <div id="fifty_first" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 5 Power Generators</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fifty_second" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 400 Power Generators</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fifty_third" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 900 Power Generators</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fifty_fourth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 4000 Power Generators</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fifty_fifth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 9000 Power Generators</h4>
-                </div>
-              </div>
-
-              <h5>Generator Room</h5>
-              <div class="media">
-                <div id="fifty_sixth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 15 Generator Rooms</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fifty_seventh" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 450 Generator Rooms</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fifty_eighth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 970 Generator Rooms</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="fifty_nineth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 4600 Generator Rooms</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="sixtieth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 9800 Generator Rooms</h4>
-                </div>
-              </div>
-
-              <h5>Solar Panel</h5>
-              <div class="media">
-                <div id="sixty_first" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 20 Solar Panels</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="sixty_second" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 200 Solar Panels</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="sixty_third" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 1200 Solar Panels</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="sixty_fourth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 6000 Solar Panels</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="sixty_fifth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 10.000 Solar Panels</h4>
-                </div>
-              </div>
-
-              <h5>Solar Panel Farms</h5>
-              <div class="media">
-                <div id="sixty_sixth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 80 Solar Panel Farms</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="sixty_seventh" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 800 Solar Panel Farms</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="sixty_eighth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 1600 Solar Panel Farms</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="sixty_nineth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 6000 Solar Panel Farms</h4>
-                </div>
-              </div>
-              <div class="media">
-                <div id="seventieth" class="media-body">
-                  <p class="achpoints">1</p>
-                  <h4 class="media-heading">Bought 10.000 Solar Panel Farms</h4>
-                </div>
-              </div>
-            </div>
-            <!-- ============ SETTINGS TAB ============ -->
-            <div id="settings" class="tab-pane fade">
-              <div class="container">
-                <ul class="nav nav-tabs">
-                  <li>
-                    <a id="#Save-Tab" href="#Save-Tab"> Save Settings</a>
-                  </li>
-                  <li>
-                    <a id="#Site-Tab" href="#Site-Tab"> Site Settings</a>
-                  </li>
-                  <li>
-                    <a id="#Statistics-Tab" href="#Statistics-Tab"> Statistics</a>
-                  </li>
-                  <li>
-                    <a id="#Contact-Tab" href="#Contact-Tab"> Contact</a>
-                  </li>
-                  <li>
-                    <a id="#Credits-Tab" href="#Credits-Tab"> Credits</a>
-                  </li>
-                </ul>
-                <div class="tab-content">
-                  <div id="Save-Tab" class="tab-pane fade in active">
-                    <p id="changelog">Click here for a full project changelog.
-                      <a href="https://github.com/KoKsMAN/Collaborative/blob/master/README.md" target="_blank">
-                        <span>Changelog</span>
-                      </a>
-                    </p>
-                    <br />
-                    <p>The Game saves progress automatically every 1 minute.</p>
-                    <p>Your save data is located in browser's local storage</p>
-                    <br />
-                    <p>Press "Save Game" button to save game, if you don't want to wait until another auto save.</p>
-                    <button type="button" class="btn btn-success" onclick="gameSave()">Save Game</button>
-                    <br />
-                    <br />
-                    <span>ALPHA FEATURE</span>
-                    <p>You can generate key to safeguard your data or continue progress on different device / computer.</p>
-                    <br />
-                    <p>To save, press on generate key button and copy the key (Ctrl+c). Keep that key somewhere safe.
-                      <br/>
-                      <p>To load, paste your key (Ctrl+v) into the text box and click on "Load" button.</p>
-                      <br />
-                      <textarea id="impo-expo"></textarea>
-                      <br/>
-                      <input class="btn btn-default" onclick="gameLoadString()" type="submit" value="Load">
-                      <button type="button" class="btn btn-default" onclick="gameSaveString()">Generate Key</button>
-                      <p>Press "Delete Save" button to remove save data from local storage.</p>
-                      <button type="button" class="btn btn-danger" id="Delete" onclick="deleteSave(); history.go(0)">Delete Save</button>
-                  </div>
-                  <div id="Site-Tab" class="tab-pane fade">
-                    <p>You can rename your commander and colony by clicking the button below.</p>
-                    <button type="button" class="btn btn-default" onclick="renameCharacter()">Rename</button>
-                  </div>
-                  <div id="Statistics-Tab" class="tab-pane fade">
-                    <div id="stats">
-                      Number of mouse clicks :
-                      <span id="mouse-clicks"></span> times.
-                    </div>
-                  </div>
-                  <div id="Contact-Tab" class="tab-pane fade">
-                    <p>Have you found annoying bug ? Do you have an idea on how to improve the game ? Is there any missing feature you'd like to see ?</p>
-                    <p>Please use following email address for contact: <span>contact[dot]spacecolonists[at]gmail.com<span></p>
-                    <p>Alternatively you can use the following link to reddit thread: <a href="https://www.reddit.com/r/incremental_games/comments/3j7j2v/space_colonists_my_first_take_on_js_incremental/" target="_blank"><span>Click</span></a></p>
-                    <p>I will try to get back to you within 24 hours.</p>
-                  </div>
-                  <div id="Credits-Tab" class="tab-pane fade">
-                    <p>We use Google Analytics on our website to collect simple data.
-                      <br />This data helps us understand users and improve our game.
-                      <br />You can opt-out of Google Analytics by following
-                      <a href="https://tools.google.com/dlpage/gaoptout">
-                        <span>THIS LINK</span>
-                      </a>
-                    </p>
-                    <p>Layout resources found on
-                      <a href="http://www.freepik.com/">
-                        <span>Freepik.</span>
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- ============ NEWS TAB ============ -->
-            <div id="news" class="tab-pane fade">
-              <h1 id="current-version">*Current Version 0.3.9*</h1>
-              <h2 class="changelog-exp">Development road map</h2>
-              <div class="changelog-item">
-                <h3>DONE:</h3>
-                <ul id="done">
-                  <li>- Basic functionality</li>
-                  <li>- Basic game's topic</li>
-                  <li>- Basic units, currency and buildings</li>
-                  <li>- Create page layout</li>
-                  <li>- Units and buildings cost increase formula</li>
-                  <li>- Partial achievements system</li>
-                  <li>- Units and buildings resource income</li>
-                  <li>- A way to display high numbers in shorter and more user-friendly way</li>
-                  <li>- Complete achievements system</li>
-                  <li>- Make new units and buildings appear on the list over the course of game</li>
-                  <li>- Introduce upgrades</li>
-                  <li>- Create user interface elements (PARTIAL)</li>
-                  <li>- Bring the website online</li>
-                  <li>- Add Dev changelog on the website.</li>
-                  <li>- Make numbers generation speed up.</li>
-                  <li>- Colony Commander module.(PARTIAL)</li>
-                </ul>
-              </div>
-
-              <div class="changelog-item">
-                <h3>TO BE DONE:</h3>
-                <ul id="to-be-done">
-                  <li>- Support for older browsers</li>
-                  <li>- Cookies saves</li>
-                  <li>- Gameplay statistics</li>
-                  <li>- User settings</li>
-                  <li>- Make buildings have their functions rather than being idle resource givers.</li>
-                  <li>- Make both resources to be used in relation to each other.</li>
-                  <li>- Add new resources (?).</li>
-                  <li>- Add new units and buildings.</li>
-                  <li>- Add bonuses for unlocking achievements.</li>
-                  <li>- Add personalisation options for users.</li>
-                  <li>- Add more upgrades.</li>
-                  <li>- Add more achievements / tweak existing ones.</li>
-                  <li>- Make mobile version of the website.</li>
-                  <li>- Complete Colony Commander module.</li>
-                  <li>- Further improve page layout.</li>
-                </ul>
-              </div>
-
-              <div class="changelog-item">
-                <h2 class="changelog-exp">Known bugs</h2>
-                <ul>
-                  <li>- None. </li>
-                </ul>
-              </div>
-              <h2 class="changelog-exp">Recent Changes, head over to "Settings" tab for full changelog.</h2>
-              <div class="changelog-item">
-                <h3>*Version 0.3.9* September 8th, 2015</h3>
-                <ul>
-                  <li>- Fixed bug where player could buy the same upgrade twice.</li>
-                  <li>- Adjusted Energy buildings cost.</li>
-                  <li>- Added simple character creator. (First part of planned commander module.)</li>
-                  <li>- Introduced number generation accelerator (Still needs correct implementation.<br /> Locked at 2nd gear atm.)</li>
-                  <li>- Repleaced social buttons with new ones.</li>
-                  <li>- Removed twitter and facebook buttons (no official accounts yet.)</li>
-                  <li>- Changes to the settings tab.</li>
-                  <li>- Added user statistics. (Only mouse clicks as of now.)</li>
-                  <li>- Added contact tab.</li>
-                </ul>
-              </div>
-              <div class="changelog-item">
-                <h3>*Version 0.3.8* September 5th, 2015</h3>
-                <ul>
-                  <li>- Added option to import / export save data via key.</li>
-                  <li>- Fixed horizontal scroll bar bug.</li>
-                  <li>- Auto save reminder should scale with window width now.</li>
-                  <li>- Small visual changes and tweaks.</li>
-                </ul>
-              </div>
-              <div class="changelog-item">
-                <h3>*Version 0.3.7* September 4th, 2015</h3>
-                <ul>
-                  <li>- Buy all button has been fixed.</li>
-                  <li>- Upgrades appear together with units they belong to.</li>
-                  <li>- Fixed Robot buttons not displaying correctly.</li>
-                  <li>- Deleting Save data shouldn't change the layout size anymore.</li>
-                  <li>- Added reminder about auto save.</li>
-                </ul>
-              </div>
-              <div class="changelog-item">
-                <h3>*Version 0.3.6* September 3rd, 2015</h3>
-                <ul>
-                  <li>- Added manual save button and changed the interval of auto save (every 1 minute).
-                    <br /> User is notified via message when save takes place.</li>
-                  <li>- Added new tab "News" to easier keep track of changelog / known bugs and development status.</li>
-                  <li>- Fixed error in some of the achievements. Now all unlocked achievements should increase achievement score.</li>
-                </ul>
-              </div>
-              <div class="changelog-item">
-                <h3>*Version 0.3.5a* September 1st, 2015</h3>
-                <ul>
-                  <li>- Adjusted cost of energy buildings.</li>
-                  <li>- Adjusted cost of upgrades.</li>
-                  <li>- Owned upgrades are visually more appealing.</li>
-                </ul>
-              </div>
-              <div class="changelog-item">
-                <h3>*Version 0.3.5* September 1st, 2015</h3>
-                <ul>
-                  <li>- Fixed buy 5 button.**</li>
-                  <li>- Changed background.</li>
-                  <li>- Fixes to the code.</li>
-                  <li>**Thanks to <a href="https://www.reddit.com/user/Brownprobe">Brownprobe</a> for his help with the formula.</li>
-                </ul>
-              </div>
-              <div class="changelog-item">
-                <h3>*Version 0.3.1* August 28th, 2015</h3>
-                <ul>
-                  <li>- Fixed unit cost not updating properly.</li>
-                  <li>- Fixed unit resource generation.</li>
-                  <li>- Some visual tweaking.</li>
-                </ul>
-              </div>
-              <div class="changelog-item">
-                <h3>*Version 0.3.0* August 27th, 2015</h3>
-                <ul>
-                  <li>- Fixes to the code.</li>
-                  <li>- Few new layout elements.</li>
-                  <li>- Moved achievements into separate file.</li>
-                  <li>- Updated game's logo.</li>
-                </ul>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.colonist, 'credits', 1, 'Credits')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.colonist, 'credits', 5, 'Credits')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.colonist, 'credits', 'Credits')">Buy All</button>
               </div>
             </div>
           </div>
-          <div id="Game-Save">Game Saved !</div>
+          <div class="tab1" id="hide-engineer">
+            <div class="tab-text">
+              Engineers:
+              <span id="engineer"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Credits
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.engineer, 'credits', 1, 'Credits')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.engineer, 'credits', 5, 'Credits')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.engineer, 'credits', 'Credits')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab1" id="hide-inventor">
+            <div class="tab-text">
+              Inventors:
+              <span id="inventor"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Credits
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.inventor, 'credits', 1, 'Credits')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.inventor, 'credits', 5, 'Credits')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.inventor, 'credits', 'Credits')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab1" id="hide-scientist">
+            <div class="tab-text">
+              Scientists:
+              <span id="scientist"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Credits
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.scientist, 'credits', 1, 'Credits')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.scientist, 'credits', 5, 'Credits')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.scientist, 'credits', 'Credits')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab1" id="hide-robot">
+            <div class="tab-text">
+              Robots:
+              <span id="robot"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Credits
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.robot, 'credits', 1, 'Credits')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.robot, 'credits', 5, 'Credits')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.robot, 'credits', 'Credits')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab1" id="hide-android">
+            <div class="tab-text">
+              Androids:
+              <span id="android"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Credits
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.android, 'credits', 1, 'Credits')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.android, 'credits', 5, 'Credits')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.android, 'credits', 'Credits')">Buy All</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============ TECH TAB =========== = -->
+        <div id="tech" class="tab-pane fade">
+          <div class="tab2" id="engi">
+            <div class="tab-text">
+              Workbenches:
+              <span id="workbench"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost">15</span> Credits
+              <br /> Power required:
+              <span class="Power">1 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.workbench, 'credits', 1, 'Credits')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.workbench, 'credits', 5, 'Credits')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.workbench, 'credits', 'Credits')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab2" id="hide-workshop">
+            <div class="tab-text">
+              Workshops:
+              <span id="workshop"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Tech
+              <br /> Power required:
+              <span class="Power">5 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.workshop, 'tech', 1, 'Tech')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.workshop, 'tech', 5, 'Tech')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.workshop, 'tech', 'Tech')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab2" id="hide-research-lab">
+            <div class="tab-text">
+              Research Labs:
+              <span id="research-lab"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Tech
+              <br /> Power required:
+              <span class="Power">30 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.resLab, 'tech', 1, 'Tech')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.resLab, 'tech', 5, 'Tech')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.resLab, 'tech', 'Tech')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab2" id="hide-research-facillity">
+            <div class="tab-text">
+              Research Facilities:
+              <span id="research-facility"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Tech
+              <br /> Power required:
+              <span class="Power">150 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.resFac, 'tech', 1, 'Tech')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.resFac, 'tech', 5, 'Tech')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.resFac, 'tech', 'Tech')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab2" id="hide-robotics-factory">
+            <div class="tab-text">
+              Robotics Factories:
+              <span id="robotics-factory"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Tech
+              <br /> Power required:
+              <span class="Power">600 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.roboticsFact, 'tech', 1, 'Tech')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.roboticsFact, 'tech', 5, 'Tech')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.roboticsFact, 'tech', 'Tech')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab2" id="hide-cybernetics-lab">
+            <div class="tab-text">
+              Cybernetics Labs:
+              <span id="cybernetics-lab"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Tech
+              <br /> Power required:
+              <span class="Power">2500 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.cyberLab, 'tech', 1, 'Tech')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.cyberLab, 'tech', 5, 'Tech')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.cyberLab, 'tech', 'Tech')">Buy All</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============ ENERGY TAB ============ -->
+        <div id="energy" class="tab-pane fade">
+          <div class="tab3">
+            <div class="tab-text">
+              Battery Packs:
+              <span id="battery-pack"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Credits
+              <br /> Power generated:
+              <span class="Power-prod">1.2 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.battPack, 'credits', 1, 'Credits')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.battPack, 'credits', 5, 'Credits')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.battPack, 'credits', 'Credits')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab3" id="hide-solar-panel">
+            <div class="tab-text">
+              Solar Panels:
+              <span id="solar-panel"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Tech
+              <br /> Power generated:
+              <span class="Power-prod">7 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.solPan, 'energy', 1, 'Energy')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.solPan, 'energy', 5, 'Energy')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.solPan, 'energy', 'Energy')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab3" id="hide-solar-panel-farm">
+            <div class="tab-text">
+              Solar Panel Farms:
+              <span id="solar-panel-farm"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Tech
+              <br /> Power generated:
+              <span class="Power-prod">35 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.solPanFarm, 'energy', 1, 'Energy')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.solPanFarm, 'energy', 5, 'Energy')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.solPanFarm, 'energy', 'Energy')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab3" id="hide-thermal-power-station">
+            <div class="tab-text">
+              Thermal Power Stations:
+              <span id="thermal-power-station"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Tech
+              <br /> Power generated:
+              <span class="Power-prod">180 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.termPowStation, 'energy', 1, 'Energy')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.termPowStation, 'energy', 5, 'Energy')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.termPowStation, 'energy', 'Energy')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab3" id="hide-nuclear-power-plant">
+            <div class="tab-text">
+              Nuclear Power Plants:
+              <span id="nuclear-power-plant"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Tech
+              <br /> Power generated:
+              <span class="Power-prod">800 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.nucPowPlant, 'energy', 1, 'Energy')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.nucPowPlant, 'energy', 5, 'Energy')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.nucPowPlant, 'energy', 'Energy')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab3" id="hide-fusion-reactor">
+            <div class="tab-text">
+              Fusion Reactors:
+              <span id="fusion-reactor"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Tech
+              <br /> Power generated:
+              <span class="Power-prod">2700 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.fusReactor, 'energy', 1, 'Energy')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.fusReactor, 'energy', 5, 'Energy')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.fusReactor, 'energy', 'Energy')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab3" id="hide-uranium-reactor">
+            <div class="tab-text">
+              Uranium Reactors:
+              <span id="uranium-reactor"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Tech
+              <br /> Power generated:
+              <span class="Power-prod">8000 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.uraReactor, 'energy', 1, 'Energy')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.uraReactor, 'energy', 5, 'Energy')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.uraReactor, 'energy', 'Energy')">Buy All</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============ URANIUM TAB ============ -->
+        <div id="uranium" class="tab-pane fade">
+          <div class="tab4">
+            <div class="tab-text">
+              Mining Bots:
+              <span id="miningBot"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Credits
+              <br /> Power required:
+              <span class="Power">450 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.miningBot, 'credits', 1, 'Credits')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.miningBot, 'credits', 5, 'Credits')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.miningBot, 'credits', 'Credits')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab4" id="hide-uranium-smelter">
+            <div class="tab-text">
+              Uranium Smelters:
+              <span id="uranium-smelter"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Uranium
+              <br /> Power required:
+              <span class="Power">3200 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.uraSmelter, 'uranium', 1, 'Uranium')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.uraSmelter, 'uranium', 5, 'Uranium')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.uraSmelter, 'uranium', 'Uranium')">Buy All</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab4" id="hide-uranium-refinery">
+            <div class="tab-text">
+              Uranium Refineries:
+              <span id="uranium-refinery"></span>
+              <br /> Generating:
+              <span class="Generating"></span>
+              <br /> Cost:
+              <span class="Cost"></span> Uranium
+              <br /> Power required:
+              <span class="Power">7700 /s</span>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.uraRefinery, 'uranium', 1, 'Uranium')">Buy 1</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyBuilding(player.uraRefinery, 'uranium', 5, 'Uranium')">Buy 5</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" onclick="buyAll(player.uraRefinery, 'uranium', 'Uranium')">Buy All</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============ UPGRADES TAB ============ -->
+        <div id="upgrades" class="tab-pane fade">
+          <div class="container">
+            <ul class="nav nav-tabs">
+              <li>
+                <a id="#Player-upgrades" href="#Player-upgrades"> Player</a>
+              </li>
+              <li>
+                <a id="#Staff-upgrades" href="#Staff-upgrades"> Staff</a>
+              </li>
+              <li>
+                <a id="#Tech-upgrades" href="#Tech-upgrades"> Tech</a>
+              </li>
+              <li>
+                <a id="#Energy-upgrades" href="#Energy-upgrades"> Energy</a>
+              </li>
+              <li>
+                <a id="#Uranium-upgrades" href="#Uranium-upgrades"> Uranium</a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <div id="Player-upgrades" class="tab-pane fade in active">
+                <center>
+                  <h5>UNDER CONSTRUCTION</h5>
+                </center>
+              </div>
+              <div id="Staff-upgrades" class="tab-pane fade">
+                <div class="row">
+                  <div class="col-md-4">
+                    <span>Colonist</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="colonist5Perc" class="btn btn-default" onclick="buyUpgrade(200, 0, 0, 0,'colonist5Perc', 0.005)">5% for 200 C</button>
+                      <button type="button" id="colonist25Perc" class="btn btn-default" onclick="buyUpgrade(1000, 0, 0, 0, 'colonist25Perc', 0.025)">25% for 1k C</button>
+                    </div>
+                  </div>
+                  <div id="hide-engineer2" class="col-md-4">
+                    <span>Engineer</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="engineer5Perc" class="btn btn-default" onclick="buyUpgrade(1500, 0, 0, 0, 'engineer5Perc', 0.025)">5% for 1,5k C</button>
+                      <button type="button" id="engineer25Perc" class="btn btn-default" onclick="buyUpgrade(6000, 0, 0, 0, 'engineer25Perc', 0.125)">25% for 6k C</button>
+                    </div>
+                  </div>
+                  <div id="hide-inventor2" class="col-md-4">
+                    <span>Inventor</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="inventor5Perc" class="btn btn-default" onclick="buyUpgrade(7000, 0, 0, 0, 'inventor5Perc', 0.2)">5% for 7k C</button>
+                      <button type="button" id="inventor25Perc" class="btn btn-default" onclick="buyUpgrade(28000, 0, 0, 0, 'inventor25Perc', 1)">25% for 28k C</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div id="hide-scientist2" class="col-md-4">
+                    <span>Scientist</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="scientist5Perc" class="btn btn-default" onclick="buyUpgrade(40000, 0, 0, 0, 'scientist5Perc', 0.5)">5% for 40k C</button>
+                      <button type="button" id="scientist25Perc" class="btn btn-default" onclick="buyUpgrade(200000, 0, 0, 0, 'scientist25Perc', 2.5)">25% for 200k C</button>
+                    </div>
+                  </div>
+                  <div id="hide-robot2" class="col-md-4">
+                    <span>Robot</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="robot5Perc" class="btn btn-default" onclick="buyUpgrade(1200000, 0, 0, 0, 'robot5Perc', 2)">5% for 1,2m C</button>
+                      <button type="button" id="robot25Perc" class="btn btn-default" onclick="buyUpgrade(4000000, 0, 0, 0, 'robot25Perc', 10)">25% for 4m C</button>
+                    </div>
+                  </div>
+                  <div id="hide-android2" class="col-md-4">
+                    <span>Android</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="android5Perc" class="btn btn-default" onclick="buyUpgrade(250000, 0, 0, 0, 'android5Perc', 5)">5% for 280k C</button>
+                      <button type="button" id="android25Perc" class="btn btn-default" onclick="buyUpgrade(1000000, 0, 0, 0, 'android25Perc', 25)">25% for 1m C</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="Tech-upgrades" class="tab-pane fade">
+                <div class="row">
+                  <div id="hide-workbench2" class="col-md-4">
+                    <span>Workbench</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="workbench5Perc" class="btn btn-default" onclick="buyUpgrade(0, 1000, 0, 0, 'workbench5Perc', 0.05)">5% for 1k T</button>
+                      <button type="button" id="workbench25Perc" class="btn btn-default" onclick="buyUpgrade(0, 5000, 0, 0, 'workbench25Perc', 0.25)">25% for 5k T</button>
+                    </div>
+                  </div>
+                  <div id="hide-workshop2" class="col-md-4">
+                    <span>Workshop</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="workshop5Perc" class="btn btn-default" onclick="buyUpgrade(0, 6000, 0, 0, 'workshop5Perc', 0.25)">5% for 6k T</button>
+                      <button type="button" id="workshop25Perc" class="btn btn-default" onclick="buyUpgrade(0, 30000, 0, 0, 'workshop25Perc', 1.25)">25% for 30k T</button>
+                    </div>
+                  </div>
+                  <div id="hide-research-lab2" class="col-md-4">
+                    <span>Research Lab</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="researchLab5Perc" class="btn btn-default" onclick="buyUpgrade(0, 32000, 0, 0, 'researchLab5Perc', 1.5)">5% for 32k T</button>
+                      <button type="button" id="researchLab25Perc" class="btn btn-default" onclick="buyUpgrade(0, 200000, 0, 0, 'researchLab25Perc', 7.5)">25% for 200k T</button>
+                    </div>
+                  </div>
+                </div>
+                <div id="hide-research-facillity2" class="row">
+                  <div id="resFact2" class="col-md-4">
+                    <span>Research Facility</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="researchFacility5Perc" class="btn btn-default" onclick="buyUpgrade(0, 220000, 0, 0, 'researchFacility5Perc', 7.5)">5% for 220k T</button>
+                      <button type="button" id="researchFacility25Perc" class="btn btn-default" onclick="buyUpgrade(0, 1000000, 0, 0, 'researchFacility25Perc', 37.5)">25% for 1M T</button>
+                    </div>
+                  </div>
+                  <div id="hide-robotics-factory2" class="col-md-4">
+                    <span>Robotics Factory</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="roboticsFactory5Perc" class="btn btn-default" onclick="buyUpgrade(0, 1200000, 0, 0, 'roboticsFactory5Perc', 37.5)">5% for 1,2M T</button>
+                      <button type="button" id="roboticsFactory25Perc" class="btn btn-default" onclick="buyUpgrade(0, 5000000, 0, 0, 'roboticsFactory25Perc', 187.5)">25% for 5M T</button>
+                    </div>
+                  </div>
+                  <div id="hide-cybernetics-lab2" class="col-md-4">
+                    <span>Cybernetics Lab</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="cyberneticsLab5Perc" class="btn btn-default" onclick="buyUpgrade(0, 6000000, 0, 0, 'cyberneticsLab5Perc', 150)">5% for 6M T</button>
+                      <button type="button" id="cyberneticsLab25Perc" class="btn btn-default" onclick="buyUpgrade(0, 30000000, 0, 0, 'cyberneticsLab25Perc', 750)">25% for 30M T</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="Energy-upgrades" class="tab-pane fade">
+                <div class="row">
+                  <div id="hide-battery-pack2" class="col-md-4">
+                    <span>Battery Pack</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="batteryPack5Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 1300, 0, 'batteryPack5Perc', 0.075)">5% for 1,3k E</button>
+                      <button type="button" id="batteryPack25Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 6000, 0, 'batteryPack25Perc', 0.375)">25% for 6k E</button>
+                    </div>
+                  </div>
+                  <div id="hide-solar-panel2" class="col-md-4">
+                    <span>Solar Panel</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="solarPanel5Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 7000, 0, 'solarPanel5Perc', 0.35)">5% for 7k E</button>
+                      <button type="button" id="solarPanel25Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 34000, 0, 'solarPanel25Perc', 1.75)">5% for 34k E</button>
+                    </div>
+                  </div>
+                  <div id="hide-solar-panel-farm2" class="col-md-4">
+                    <span>Solar Panel Farm</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="solarPanelFarm5Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 38000, 0, 'solarPanelFarm5Perc', 2)">5% for 38k E</button>
+                      <button type="button" id="solarPanelFarm25Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 230000, 0, 'solarPanelFarm25Perc', 10)">25% for 230k E</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div id="hide-thermal-power-station2" class="col-md-4">
+                    <span>Thermal Power Station</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="thermalPowerStation5Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 250000, 0, 'thermalPowerStation5Perc', 10)">5% for 250k E</button>
+                      <button type="button" id="thermalPowerStation25Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 1200000, 0, 'thermalPowerStation25Perc', 50)">25% for 1,2M T</button>
+                    </div>
+                  </div>
+                  <div id="hide-nuclear-power-plant2" class="col-md-4">
+                    <span>Nuclear Power Plant</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="nuclearPowerPlant5Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 1400000, 0, 'nuclearPowerPlant5Perc', 50)">5% for 1,4M E</button>
+                      <button type="button" id="nuclearPowerPlant25Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 6400000, 0, 'nuclearPowerPlant25Perc', 250)">5% for 6,4M E</button>
+                    </div>
+                  </div>
+                  <div id="hide-fusion-reactor2" class="col-md-4">
+                    <span>Fusion Reactor</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="fusionReactor5Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 7000000, 0, 'fusionReactor5Perc', 190)">5% for 7M E</button>
+                      <button type="button" id="fusionReactor25Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 34000000, 0, 'fusionReactor25Perc', 950)">25% for 34M E</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div id="hide-uranium-reactor2" class="col-md-4">
+                    <span>Uranium Reactor</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="uraniumReactor5Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 36000000, 0, 'uraniumReactor5Perc', 500)">5% for 36M E</button>
+                      <button type="button" id="uraniumReactor25Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 100000000, 0, 'uraniumReactor25Perc', 2500)">25% for 1B E</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="Uranium-upgrades" class="tab-pane fade">
+                <div class="row">
+                  <div id="hide-miningBot2" class="col-md-4">
+                    <span>Mining Bot</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="miningBot5Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 0, 1000000, 'miningBot5Perc', 25)">5% for 1M U</button>
+                      <button type="button" id="miningBot25Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 0, 5000000, 'miningBot25Perc', 125)">25% for 5M U</button>
+                    </div>
+                  </div>
+                  <div id="hide-uranium-smelter2" class="col-md-4">
+                    <span>Uranium Smelter</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="uraniumSmelter5Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 0, 6000000, 'uraniumSmelter5Perc', 150)">5% for 6M U</button>
+                      <button type="button" id="uraniumSmelter25Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 0, 32000000, 'uraniumSmelter25Perc', 750)">5% for 32M U</button>
+                    </div>
+                  </div>
+                  <div id="hide-uranium-refinery2" class="col-md-4">
+                    <span>Uranium Refinery</span>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" id="uraniumRefinery5Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 0, 36000000, 'uraniumRefinery5Perc', 750)">5% for 36M U</button>
+                      <button type="button" id="uraniumRefinery25Perc" class="btn btn-default" onclick="buyUpgrade(0, 0, 0, 100000000, 'uraniumRefinery25Perc', 3750)">25% for 1B U</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- tab content -->
+          </div>
+        </div>
+        <!-- ============ ACHIEVEMENTS TAB ============ -->
+        <div id="achievements" class="tab-pane fade">
+          <p>CURRENT POINTS:
+            <span id="points">0</span>
+          </p>
+          <div class="progress progress-striped">
+            <div id="ach-bar" class="progress-bar progress-bar-custom active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="150">
+            </div>
+          </div>
+          <h5>Tech</h5>
+          <div class="media">
+            <div id="first" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Some scraps laying around</h4>
+              <p class="media-para">Collect 100 Tech</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="second" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Should be enough to build a calculator...</h4>
+              <p class="media-para">Collect 10.000 Tech</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="third" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">...Or 10 calculators</h4>
+              <p class="media-para">Collect 100.000 Tech</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fourth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Hamster</h4>
+              <p class="media-para">Collect 1.000.000 Tech</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fifth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Ultimate hoarder</h4>
+              <p class="media-para">Collect 50.000.000 Tech</p>
+            </div>
+          </div>
+          <!--Energy-->
+          <h5>Energy</h5>
+          <div class="media">
+            <div id="sixth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Small spark</h4>
+              <p class="media-para">Collect 100 Energy</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="seventh" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Energized</h4>
+              <p class="media-para">Collect 10.000 Energy</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="eighth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Lightbringer</h4>
+              <p class="media-para">Collect 100.000 Energy</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="nineth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Darkness conqueror</h4>
+              <p class="media-para">Collect 1.000.000 Energy</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="tenth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">God's light</h4>
+              <p class="media-para">Collect 50.000.000 Energy</p>
+            </div>
+          </div>
+          <!--Credits-->
+          <h5>Credits</h5>
+          <div class="media">
+            <div id="eleventh" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Found some coins under the rock</h4>
+              <p class="media-para">Collect 100 Credits</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="twelfth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Pocket money</h4>
+              <p class="media-para">Collect 10.000 Credits</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="thirteenth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Getting there</h4>
+              <p class="media-para">Collect 100.000 Credits</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fourteenth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Millionaire</h4>
+              <p class="media-para">Collect 1.000.000 Credits</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fifteenth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">It's raining money</h4>
+              <p class="media-para">Collect 50.000.000 Credits</p>
+            </div>
+          </div>
+          <!--Uranium-->
+          <h5>Uranium</h5>
+          <div class="media">
+            <div id="sixteenth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Look what I just dug out !</h4>
+              <p class="media-para">Collect 100 Uranium</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="seventeenth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Prospector</h4>
+              <p class="media-para">Collect 10.000 Uranium</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="eighteenth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Excavation freak</h4>
+              <p class="media-para">Collect 100.000 Uranium</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="nineteenth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Mining frenzy</h4>
+              <p class="media-para">Collect 1.000.000 Uranium</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="twentieth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Endless supply</h4>
+              <p class="media-para">Collect 50.000.000 Uranium</p>
+            </div>
+          </div>
+          <!--Colonists-->
+          <h5>Colonists</h5>
+          <div class="media">
+            <div id="twenty_first" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">A first step in the new world</h4>
+              <p class="media-para">Bought 1 Colonist</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="twenty_second" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">The colony is growing</h4>
+              <p class="media-para">Bought 500 Colonists</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="twenty_third" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">The strenght is in numbers</h4>
+              <p class="media-para">Bought 1.000 Colonists</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="twenty_fourth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Breeding grounds</h4>
+              <p class="media-para">Bought 5.000 Colonists</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="twenty_fifth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">It's like an ant nest here</h4>
+              <p class="media-para">Bought 10.000 Colonists</p>
+            </div>
+          </div>
+          <!--Engineers-->
+          <h5>Engineers</h5>
+          <div class="media">
+            <div id="twenty_sixth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Mr. Fix it</h4>
+              <p class="media-para">Bought 1 Engineer</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="twenty_seventh" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Maintenance crew</h4>
+              <p class="media-para">Bought 500 Engineers</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="twenty_eighth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">The more the merrier</h4>
+              <p class="media-para">Bought 1.000 Engineers</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="twenty_nineth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">No more accidents</h4>
+              <p class="media-para">Bought 5.000 Engineers</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="thirtieth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Wrench army</h4>
+              <p class="media-para">Bought 10.000 Engineers</p>
+            </div>
+          </div>
+          <!--Inventors-->
+          <h5>Inventors</h5>
+          <div class="media">
+            <div id="thirty_first" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Inventor</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="thirty_second" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Inventors</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="thirty_third" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Inventors</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="thirty_fourth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Inventors</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="thirty_fifth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Inventors</p>
+            </div>
+          </div>
+          <!--Scientists-->
+          <h5>Scientists</h5>
+          <div class="media">
+            <div id="thirty_sixth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Scientist</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="thirty_seventh" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Scientists</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="thirty_eighth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Scientists</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="thirty_nineth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Scientists</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fortieth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Scientists</p>
+            </div>
+          </div>
+          <!--Robots-->
+          <h5>Robots</h5>
+          <div class="media">
+            <div id="forty_first" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">I, robot</h4>
+              <p class="media-para">Bought 1 Robot</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="forty_second" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Three Laws of Robotics</h4>
+              <p class="media-para">Bought 500 Robots</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="forty_third" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">VIKI's plan</h4>
+              <p class="media-para">Bought 1.000 Robots</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="forty_fourth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Will's nightmare</h4>
+              <p class="media-para">Bought 5.000 Robots</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="forty_fifth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">NS-5 carnage</h4>
+              <p class="media-para">Bought 10.000 Robots</p>
+            </div>
+          </div>
+          <!--Android-->
+          <h5>Androids</h5>
+          <div class="media">
+            <div id="forty_sixth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Bishop, is that you ?</h4>
+              <p class="media-para">Bought 1 Android</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="forty_seventh" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Synthetic Blood</h4>
+              <p class="media-para">Bought 500 Androids</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="forty_eighth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">droidTastic</h4>
+              <p class="media-para">Bought 1.000 Androids</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="forty_nineth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">Army of clones</h4>
+              <p class="media-para">Bought 5.000 Androids</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fiftieth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading">droidPocalypse</h4>
+              <p class="media-para">Bought 10.000 Androids</p>
+            </div>
+          </div>
+          <!--Workbench-->
+          <h5>Workbench</h5>
+          <div class="media">
+            <div id="fifty_first" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Workbench </p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fifty_second" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Workbenches</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fifty_third" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Workbenches </p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fifty_fourth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Workbenches </p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fifty_fifth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Workbenches </p>
+            </div>
+          </div>
+          <!--Workshop-->
+          <h5>Workshop</h5>
+          <div class="media">
+            <div id="fifty_sixth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Workshop </p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fifty_seventh" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Workshops </p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fifty_eighth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Workshops </p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="fifty_nineth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Workshops </p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="sixtieth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Workshops </p>
+            </div>
+          </div>
+          <!--Research Labs-->
+          <h5>Research Lab</h5>
+          <div class="media">
+            <div id="sixty_first" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Research Labs</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="sixty_second" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Research Labs</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="sixty_third" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Research Labs</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="sixty_fourth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Research Labs</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="sixty_fifth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Research Labs</p>
+            </div>
+          </div>
+          <!--Research Facilities-->
+          <h5>Research Facility</h5>
+          <div class="media">
+            <div id="sixty_sixth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Research Facilitiy</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="sixty_seventh" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Research Facilities</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="sixty_eighth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Research Facilities</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="sixty_nineth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Research Facilities</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="seventieth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Research Facilities</p>
+            </div>
+          </div>
+          <!--Robotics Factory-->
+          <h5>Robotics Factory</h5>
+          <div class="media">
+            <div id="seventy_first" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Robotics Factory</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="seventy_second" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Robotics Factories</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="seventy_third" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Robotics Factories</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="seventy_fourth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Robotics Factories</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="seventy_fifth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Robotics Factories</p>
+            </div>
+          </div>
+          <!--Cybernetics Labs-->
+          <h5>Cybernetics Lab</h5>
+          <div class="media">
+            <div id="seventy_sixth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Cybernetics Lab</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="seventy_seventh" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Cybernetics Labs</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="seventy_eighth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Cybernetics Labs</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="seventy_nineth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Cybernetics Labs</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="eightieth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Cybernetics Labs</p>
+            </div>
+          </div>
+          <!--Battery Packs-->
+          <h5>Battery Pack</h5>
+          <div class="media">
+            <div id="eighty_first" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Battery Pack</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="eighty_second" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Battery Packs</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="eighty_third" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Battery Packs</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="eighty_forth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Battery Packs</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="eighty_fifth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Battery Packs</p>
+            </div>
+          </div>
+
+          <!--Solar Panels-->
+          <h5>Solar Panel</h5>
+          <div class="media">
+            <div id="eighty_sixth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Solar Panel</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="eighty_seventh" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Solar Panels</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="eighty_eighth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Solar Panels</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="eighty_ninenth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Solar Panels</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="ninetieth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Solar Panels</p>
+            </div>
+          </div>
+          <!--Solar Panel Farms-->
+          <h5>Solar Panel Farms</h5>
+          <div class="media">
+            <div id="ninety_first" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Solar Panel Farm</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="ninety_second" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Solar Panel Farms</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="ninety_third" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Solar Panel Farms</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="ninety_fourth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Solar Panel Farms</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="ninety_fifth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Solar Panel Farms</p>
+            </div>
+          </div>
+          <!--Thermal Power Station-->
+          <h5>Thermal Power Station</h5>
+          <div class="media">
+            <div id="ninety_sixth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Thermal Power Station</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="ninety_seventh" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Thermal Power Stations</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="ninety_eighth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Thermal Power Stations</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="ninety_nineth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Thermal Power Station</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="one_hundredth" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Thermal Power Stations</p>
+            </div>
+          </div>
+          <!--Nuclear Power Station-->
+          <h5>Nuclear Power Station</h5>
+          <div class="media">
+            <div id="hundred_one" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Nuclear Power Station</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_two" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Nuclear Power Stations</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_three" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Nuclear Power Stations</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_four" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Nuclear Power Stations</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_five" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Nuclear Power Stations</p>
+            </div>
+          </div>
+          <!--Fusion Reactor-->
+          <h5>Fusion Reactor</h5>
+          <div class="media">
+            <div id="hundred_six" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Fusion Reactor</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_seven" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Fusion Reactors</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_eight" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Fusion Reactors</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_nine" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Fusion Reactors</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_ten" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Fusion Reactors</p>
+            </div>
+          </div>
+          <!--Uranium Reactor-->
+          <h5>Uranium Reactor</h5>
+          <div class="media">
+            <div id="hundred_eleven" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Uranium Reactor</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_twelve" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 350 Uranium Reactor</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_thirteen" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Uranium Reactors</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_fourteen" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Uranium Reactors</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_fifteen" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Uranium Reactors</p>
+            </div>
+          </div>
+          <!--Mining Bot-->
+          <h5>Mining Bot</h5>
+          <div class="media">
+            <div id="hundred_sixteen" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Mining Bot</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_seventeen" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Mining Bots</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_eighteen" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Mining Bots</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_nineteen" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Mining Bots</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_twenty" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Mining Bots</p>
+            </div>
+          </div>
+          <!--Uranium Smelter-->
+          <h5>Uranium Smelter</h5>
+          <div class="media">
+            <div id="hundred_twenty_one" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Uranium Smelter</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_twenty_two" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Uranium Smelters</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_twenty_three" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Uranium Smelters</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_twenty_four" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Uranium Smelters</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_twenty_five" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Uranium Smelters</p>
+            </div>
+          </div>
+          <!--Uranium Refinery-->
+          <h5>Uranium Refinery</h5>
+          <div class="media">
+            <div id="hundred_twenty_six" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1 Uranium Refinery</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_twenty_seven" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 500 Uranium Refineries</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_twenty_eight" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 1.000 Uranium Refineries</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_twenty_nine" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 5.000 Uranium Refineries</p>
+            </div>
+          </div>
+          <div class="media">
+            <div id="hundred_thirty" class="media-body">
+              <p class="achpoints">1</p>
+              <h4 class="media-heading"></h4>
+              <p class="media-para">Bought 10.000 Uranium Refineries</p>
+            </div>
+          </div>
+        </div>
+        <!-- ============ NEWS TAB ============ -->
+        <div id="news" class="tab-pane fade">
+          <h1 id="current-version">*Current Version 0.3.9*</h1>
+          <h2 class="changelog-exp">Development road map</h2>
+          <div class="changelog-item">
+            <h3>DONE:</h3>
+            <ul id="done">
+              <li>- Basic functionality</li>
+              <li>- Basic game's topic</li>
+              <li>- Basic units, currency and buildings</li>
+              <li>- Create page layout</li>
+              <li>- Units and buildings cost increase formula</li>
+              <li>- Partial achievements system</li>
+              <li>- Units and buildings resource income</li>
+              <li>- A way to display high numbers in shorter and more user-friendly way</li>
+              <li>- Complete achievements system</li>
+              <li>- Make new units and buildings appear on the list over the course of game</li>
+              <li>- Introduce upgrades</li>
+              <li>- Create user interface elements (PARTIAL)</li>
+              <li>- Bring the website online</li>
+              <li>- Add Dev changelog on the website.</li>
+              <li>- Make numbers generation speed up.</li>
+              <li>- Colony Commander module.(PARTIAL)</li>
+            </ul>
+          </div>
+
+          <div class="changelog-item">
+            <h3>TO BE DONE:</h3>
+            <ul id="to-be-done">
+              <li>- Support for older browsers</li>
+              <li>- Cookies saves</li>
+              <li>- Gameplay statistics</li>
+              <li>- User settings</li>
+              <li>- Make buildings have their functions rather than being idle resource givers.</li>
+              <li>- Make both resources to be used in relation to each other.</li>
+              <li>- Add new resources (?).</li>
+              <li>- Add new units and buildings.</li>
+              <li>- Add bonuses for unlocking achievements.</li>
+              <li>- Add personalisation options for users.</li>
+              <li>- Add more upgrades.</li>
+              <li>- Add more achievements / tweak existing ones.</li>
+              <li>- Make mobile version of the website.</li>
+              <li>- Complete Colony Commander module.</li>
+              <li>- Further improve page layout.</li>
+            </ul>
+          </div>
+
+          <div class="changelog-item">
+            <h2 class="changelog-exp">Known bugs</h2>
+            <ul>
+              <li>- None. </li>
+            </ul>
+          </div>
+          <h2 class="changelog-exp">Recent Changes, head over to "Settings" tab for full changelog.</h2>
+          <div class="changelog-item">
+            <h3>*Version 0.4.0 - "Are we there yet ?!" * September 14th, 2015</h3>
+            <ul>
+              <li>- Added loading screen!</li>
+              <li>- Added new resources (Credits and Uranium).</li>
+              <li>- Added new resource icons.</li>
+              <li>- Added resource type information to the unit cost.</li>
+              <li>- Added new tabs (Staff and Uranium).</li>
+              <li>- Merged settings tab into one drop down tab.</li>
+              <li>- Merged "Achievements" and "News" tabs into drop down tab.</li>
+              <li>- Added new achievements.</li>
+              <li>- Added additional text to some of the achievements.</li>
+              <li>- Added animated achievement progress bar.</li>
+              <li>- Added new upgrades.</li>
+              <li>- Added new units and buildings.</li>
+              <li>- Added Power Requirement and Power Generation.</li>
+              <li>- Added new functionality : Power Balance.</li>
+              <li>- Added footer.</li>
+              <li>- Moved links from the top of the page to the footer.</li>
+              <li>- Changed social buttons and moved them down to the footer.</li>
+              <li>- Fixed issue with body width being bigger than content on mobile.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.3.9* September 8th, 2015</h3>
+            <ul>
+              <li>- Fixed bug where player could buy the same upgrade twice.</li>
+              <li>- Adjusted Energy buildings cost.</li>
+              <li>- Added simple character creator. (First part of planned commander module.)</li>
+              <li>- Introduced number generation accelerator (Still needs correct implementation.
+                <br /> Locked at 2nd gear atm.)</li>
+              <li>- Repleaced social buttons with new ones.</li>
+              <li>- Removed twitter and facebook buttons (no official accounts yet.)</li>
+              <li>- Changes to the settings tab.</li>
+              <li>- Added user statistics. (Only mouse clicks as of now.)</li>
+              <li>- Added contact tab.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.3.8* September 5th, 2015</h3>
+            <ul>
+              <li>- Added option to import / export save data via key.</li>
+              <li>- Fixed horizontal scroll bar bug.</li>
+              <li>- Auto save reminder should scale with window width now.</li>
+              <li>- Small visual changes and tweaks.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.3.7* September 4th, 2015</h3>
+            <ul>
+              <li>- Buy all button has been fixed.</li>
+              <li>- Upgrades appear together with units they belong to.</li>
+              <li>- Fixed Robot buttons not displaying correctly.</li>
+              <li>- Deleting Save data shouldn't change the layout size anymore.</li>
+              <li>- Added reminder about auto save.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.3.6* September 3rd, 2015</h3>
+            <ul>
+              <li>- Added manual save button and changed the interval of auto save (every 1 minute).
+                <br /> User is notified via message when save takes place.</li>
+              <li>- Added new tab "News" to easier keep track of changelog / known bugs and development status.</li>
+              <li>- Fixed error in some of the achievements. Now all unlocked achievements should increase achievement score.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.3.5a* September 1st, 2015</h3>
+            <ul>
+              <li>- Adjusted cost of energy buildings.</li>
+              <li>- Adjusted cost of upgrades.</li>
+              <li>- Owned upgrades are visually more appealing.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.3.5* September 1st, 2015</h3>
+            <ul>
+              <li>- Fixed buy 5 button.**</li>
+              <li>- Changed background.</li>
+              <li>- Fixes to the code.</li>
+              <li>**Thanks to <a href="https://www.reddit.com/user/Brownprobe">Brownprobe</a> for his help with the formula.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="Save-Tab" class="tab-pane fade">
+          <p id="changelog">Click here for a full project changelog.
+            <a href="https://github.com/KoKsMAN/Collaborative/blob/master/README.md" target="_blank">
+              <span>Changelog</span>
+            </a>
+          </p>
+          <br />
+          <p>The Game saves progress automatically every 1 minute.</p>
+          <p>Your save data is located in browser's local storage</p>
+          <br />
+          <p>Press "Save Game" button to save game, if you don't want to wait until another auto save.</p>
+          <button type="button" class="btn btn-success" onclick="gameSave()">Save Game</button>
+          <br />
+          <br />
+          <span>ALPHA FEATURE</span>
+          <p>You can generate key to safeguard your data or continue progress on different device / computer.</p>
+          <br/>
+          <p>Please Note that you have to generate new key if you want to include new progress after last key load</p>
+          <br />
+          <p>To save, press on generate key button and copy the key (Ctrl+c). Keep that key somewhere safe.</p>
+          <br/>
+          <p>To load, paste your key (Ctrl+v) into the text box and click on "Load" button.</p>
+          <br />
+          <textarea id="impo-expo"></textarea>
+          <br/>
+          <input class="btn btn-default" onclick="gameLoadString()" type="submit" value="Load">
+          <button type="button" class="btn btn-default" onclick="gameSaveString()">Generate Key</button>
+          <p>Press "Delete Save" button to remove save data from local storage.</p>
+          <button type="button" class="btn btn-danger" id="Delete" onclick="deleteSave(); history.go(0)">Delete Save</button>
+        </div>
+        <div id="Site-Tab" class="tab-pane fade">
+          <p>You can rename your commander and colony by clicking the button below.</p>
+          <button type="button" class="btn btn-default" onclick="renameCharacter()">Rename</button>
+        </div>
+        <div id="Statistics-Tab" class="tab-pane fade">
+          <div id="stats">
+            <p>Number of mouse clicks :
+              <span id="mouse-clicks"></span> times.</p>
+
+          </div>
+        </div>
+        <div id="Contact-Tab" class="tab-pane fade">
+          <p>Have you found annoying bug ? Do you have an idea on how to improve the game ? Is there any missing feature you'd like to see ?</p>
+          <p>Please use following email address for contact:
+            <span>contact[dot]spacecolonists[at]gmail.com
+              <span>
+          </p>
+          <p>Alternatively you can use the following link to reddit thread:
+            <a href="https://www.reddit.com/r/incremental_games/comments/3j7j2v/space_colonists_my_first_take_on_js_incremental/" target="_blank">
+              <span>Click</span>
+            </a>
+          </p>
+          <p>I will try to get back to you within 24 hours.</p>
+        </div>
+        <div id="Credits-Tab" class="tab-pane fade">
+          <p>We use Google Analytics on our website to collect simple data.
+            <br />This data helps us understand users and improve our game.
+            <br />You can opt-out of Google Analytics by following
+            <a href="https://tools.google.com/dlpage/gaoptout">
+              <span>THIS LINK</span>
+            </a>
+          </p>
+          <p>Layout resources found on
+            <a href="http://www.freepik.com/">
+              <span>Freepik.</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <div id="Game-Save">Game Saved !</div>
     </div>
+    <div class="push"></div>
+  </div>
+  <div class="footer">
+    <div class="bs-social">
+      <ul class="bs-social-buttons">
+        <li>
+          <a href="https://github.com/KoKsMAN/SpaceColonists" target="_blank">
+            <div id="github-btn">
+              <img id="github-img" src="img/github_logo.png">
+              <span id="github-txt">Github</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.reddit.com/r/incremental_games/comments/3j7j2v/space_colonists_my_first_take_on_js_incremental/" target="_blank">
+            <div id="reddit-btn">
+              <img id="reddit-img" src="img/reddit_logo.png">
+              <span id="reddit-txt">Reddit</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <p id="footer-content">
+      Space Colonists coded by |
+      <a target="_blank" href="https://github.com/KoKsMAN">KoKsMAN</a> and <a target="_blank" href="https://github.com/Nak0o0">Nak0o0</a>
+    </p>
   </div>
 </body>
 

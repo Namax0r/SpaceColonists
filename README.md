@@ -1,6 +1,6 @@
 ![alt text](http://imgur.com/M7X5T0Q.png)
 
-                                      *Current Version 0.3.9
+                                      *Current Version 0.4.0
 ___
 
 <em> Space Colonists is a java script incremental game prototype. </em>
@@ -26,6 +26,12 @@ ___
 | ✓ Add Dev changelog on the website.|
 | ✓ Make numbers generation speed up.|
 | ✓ Colony Commander module.(PARTIAL)|
+| ✓ Make buildings have their functions rather than being idle resource givers. (PARTIAL)|
+| ✓ Add new resources.|
+| ✓ Add new units and buildings.|
+| ✓ Add more achievements.|
+| ✓ Further improve page layout.(PARTIAL)|
+| ✓ Add more upgrades|
 | |
 | TO BE DONE |
 | |
@@ -33,16 +39,13 @@ ___
 | ✗ Cookies saves|
 | ✗ Gameplay statistics|
 | ✗ User settings|
-| ✗ Make buildings have their functions rather than being idle resource givers.|
+| ✗ Make buildings have their functions rather than being idle resource givers.(PARTIAL)|
 | ✗ Make both resources to be used in relation to each other. |
-| ✗ Add new resources (?).|
-| ✗ Add new units and buildings.|
 | ✗ Add bonuses for unlocking achievements.|
 | ✗ Add personalization options for users.|
-| ✗ Add more upgrades|
-| ✗ Add more achievements / tweak existing ones.|
+| ✗ Tweak achievements|
 | ✗ Make mobile version of the website.|
-| ✗ Colony Commander module.(Complete)||
+| ✗ Colony Commander module.(Complete)|
 | ✗ Further improve page layout.|
 
 |KNOWN BUGS|
@@ -50,8 +53,28 @@ ___
 |☠ None |
 
 
-
 #### **_Change Log:_** ####
+    *Version 0.4.0 "Are we there yet ?!"
+     14 September 2015
+       -Added loading screen!
+       -Added new resources (Credits and Uranium).
+       -Added new resource icons.
+       -Added resource type information to the unit cost.
+       -Added new tabs (Staff and Uranium).
+       -Merged settings tab into one drop down tab.
+       -Merged "Achievements" and "News" tabs into drop down tab.
+       -Added new achievements.
+       -Added additional text to some of the achievements.
+       -Added animated progress bar.
+       -Added new upgrades.
+       -Added new units and buildings.
+       -Added Power Requirement and Power Generation.
+       -Added new functionality : Power Balance.
+       -Added footer.
+       -Moved links from the top of the page to the footer.
+       -Changed social buttons and moved them down to the footer.
+       -Fixed issue with body width being bigger than content on mobile.
+___
     *Version 0.3.9
      8 September 2015
       -Fixed bug where player could buy the same upgrade twice.
@@ -66,11 +89,11 @@ ___
 ___
     *Version 0.3.8
      5 September 2015
-      - Added option to import / export save data via key.
-      - Fixed horizontal scroll bar bug.
-      - Auto save reminder should scale with window width now.
-      - Small visual changes and tweaks.
-  ___
+      -Added option to import / export save data via key.
+      -Fixed horizontal scroll bar bug.
+      -Auto save reminder should scale with window width now.
+      -Small visual changes and tweaks.
+___
     *Version 0.3.7
      4 September 2015
       -Buy all button has been fixed

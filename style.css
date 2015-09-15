@@ -1,53 +1,225 @@
 @font-face { font-family: Digital; src: url('fonts/digital.ttf'); }
 @font-face { font-family: Recharge; src: url('fonts/recharge.ttf'); }
 @font-face { font-family: LGot; src: url('fonts/lgot.otf'); }
-html,body{min-height:100%;}
-body {background-image: url('img/moontopright.png'),url('img/bottom.png'), url('img/Stars_Pattern_clip_art_hightt.png'); margin:0; padding:0; height:100%;
-      background-repeat: no-repeat, no-repeat, repeat;
-      background-size: 200px, 1000px, 800px;
-      background-position: top right, bottom center;
-      /*background-attachment:fixed;*/
+
+/* #### Mobile Phones Portrait #### */
+@media screen and (max-device-width: 480px) and (orientation: portrait){
+
+.footer, .push {display:none}
+}
+
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-device-width: 640px) and (orientation: landscape){
+  #body{background-color: #0b1420;}
+}
+
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-device-width: 640px){
+
+}
+
+/* #### iPhone 4+ Portrait or Landscape #### */
+@media screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2){
+  .footer, .push {display:none;}
+}
+
+/* #### Tablets Portrait or Landscape #### */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px){
+  .footer, .push {display:none}
+}
+
+/* #### Desktops #### */
+@media screen and (min-width: 1024px){
+  /* some CSS here */
+}
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+#loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #3498db;
+    -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    z-index: 1001;
+}
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #e74c3c;
+    -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #f9c922;
+    -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+@-webkit-keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);  /* IE 9 */
+        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
     }
+    100% {
+        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);  /* IE 9 */
+        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+}
+@keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);  /* IE 9 */
+        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);  /* IE 9 */
+        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+}
+#loader-wrapper .loader-section {
+    position: fixed;
+    top: 0;
+    width: 51%;
+    height: 100%;
+    background: #0b1420;
+    z-index: 1000;
+}
+#loader-wrapper .loader-section.section-left {
+    left: 0;
+}
+#loader-wrapper .loader-section.section-right {
+    right: 0;
+}
+/* Loaded */
+.loaded #loader-wrapper .loader-section.section-left {
+    -webkit-transform: translateX(-100%);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(-100%);  /* IE 9 */
+    transform: translateX(-100%);  /* Firefox 16+, IE 10+, Opera */
+    -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+                transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+}
+.loaded #loader-wrapper .loader-section.section-right {
+    -webkit-transform: translateX(100%);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(100%);  /* IE 9 */
+    transform: translateX(100%);  /* Firefox 16+, IE 10+, Opera */
+    -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+                transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+}
+.loaded #loader {
+    opacity: 0;
+-webkit-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+}
+.loaded #loader-wrapper {
+    visibility: hidden;
+    -webkit-transition: all 0.3s 1s ease-out;
+            transition: all 0.3s 1s ease-out;
+}
+/* NO JavaScript fallback*/
+.no-js #loader-wrapper {
+    display: none;
+}
+* {
+margin: 0;
+}
+html, body {min-height:100%; }
+body {background-image: url('img/bottom.png'), url('img/Stars_Pattern_clip_art_hightt.png'); margin:0; padding:0; height:100%;
+      background-repeat: no-repeat, repeat;
+      background-size: 1000px, 800px;
+      background-position: bottom center, top;
+      /*background-attachment:fixed;*/
+  }
 html *{font-size: 23px; color: white; font-family: Recharge;}
 #top-notify {height: auto ;background-color: #007df1; width: 100%;margin-bottom: 5px;position: relative;overflow: hidden;}
 #top-notify p {color: white; font-size: 14px;float:left; margin-top:10px;margin-left: 5px;position: relative;}
 #notify-button {background-color: #f1d600; margin-right: 35px;margin-top:3px; float:right}
 #nick, #nick a {font-size: 15px;}
-#logo {display: block; margin-left: auto; margin-right: auto;}
-#social-links {margin-left: 5px; width: 180px; height: 55px;}
+#logo {display: block; margin: 0 auto; width: 900px;}
 #resources {display: block; position:absolute; left:50%; margin-left:-50px;}
-#Tech, #Energy {font-family: Digital;}
-#tech, #energy {font-size: 18px;}
-#wrapper {min-height:100%; position:relative;}
-#changes{color:red; font-size: 15px; text-align: center;}
-#andro{display:none;}
-#andro2{display:none;}
-#robo{display:none;}
-#robo2{display:none;}
-#resLabo{display:none;}
-#resLabo2{display:none;}
-#resFact{display:none;}
-#resFact2{display:none;}
-#robFact{display:none;}
-#robFact2{display:none;}
-#cyberLabo{display:none;}
-#cyberLabo2{display:none;}
-#pwrgen {display:none;}
-#pwrgen2 {display:none;}
-#generoom {display:none;}
-#generoom2 {display:none;}
-#solarpan {display:none;}
-#solarpan2 {display:none;}
-#solarfarm {display:none;}
-#solarfarm2 {display:none;}
+#Tech, #Energy, #Credits, #Uranium, #power-balance {font-family: Digital;}
+.wrapper {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -100px;
+overflow: hidden;
+}
+.currency {margin-bottom: 5px;}
+#a-unlocked {z-index: 2; position: fixed;width: 300px; height: 300px;overflow:hidden;margin:0px 0px;}
+#hide-engineer{display:none;}
+#hide-engineer2{display:none;}
+#hide-inventor{display:none;}
+#hide-inventor2{display:none;}
+#hide-scientist{display:none;}
+#hide-scientist2{display:none;}
+#hide-robot{display:none;}
+#hide-robot2{display:none;}
+#hide-android{display:none;}
+#hide-android2{display:none;}
+#hide-workshop{display:none;}
+#hide-workshop2{display:none;}
+#hide-research-lab {display:none;}
+#hide-research-lab2 {display:none;}
+#hide-research-facillity {display:none;}
+#hide-research-facillity2 {display:none;}
+#hide-robotics-factory {display:none;}
+#hide-robotics-factory2 {display:none;}
+#hide-cybernetics-lab {display:none;}
+#hide-cybernetics-lab2 {display:none;}
+#hide-solar-panel {display:none;}
+#hide-solar-panel2 {display:none;}
+#hide-solar-panel-farm {display:none;}
+#hide-solar-panel-farm2 {display:none;}
+#hide-thermal-power-station {display:none;}
+#hide-thermal-power-station2 {display:none;}
+#hide-nuclear-power-plant {display:none;}
+#hide-nuclear-power-plant2 {display:none;}
+#hide-fusion-reactor {display:none;}
+#hide-fusion-reactor2 {display:none;}
+#hide-uranium-reactor {display:none;}
+#hide-uranium-reactor2 {display:none;}
+#hide-uranium-smelter {display:none;}
+#hide-uranium-smelter2 {display:none;}
+#hide-uranium-refinery {display:none;}
+#hide-uranium-refinery2 {display:none;}
 #imgexpsave {width: 100px;}
 .container {padding: 0px;}
-#cont-up {margin-top: 100px; margin-bottom: 100px;padding-bottom: 330px;}
-.tab1 {color:black; border-bottom: 2px solid #5bc436; font-size: 18px;}
-.tab1 span {font-size: 18px;}
-.tab2 {color:black; border-bottom: 2px solid #e5e80c; font-size: 18px;}
-.tab2 span {font-size: 18px;}
-.tab4 {font-size: 18px;}
+#cont-up {z-index: 1;margin-top: 320px; padding-bottom: 330px;}
+.tab1 {border-bottom: 2px solid #9a0707;}
+.tab2 {border-bottom: 2px solid #5bc436;}
+.tab3 {border-bottom: 2px solid #e5e80c;}
+.tab4 {border-bottom: 2px solid #cc0ce8;}
+.tab1 span, .tab2 span, .tab3 span, .tab4 span {font-size: 18px;}
+.tab1, .tab2, .tab3, .tab4 {color:black; font-size: 18px;}
 .tab-content, .tab-content span, .tab-content h5  {background-color: #E8E8F0; color: black;}
 .tab-pane {color: black;}
 .tab-text, .tab-text span {margin-left: 5px; color: black; font-size: 18px}
@@ -59,6 +231,8 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 #settings ul {background-image: url('img/achievement3.png');font-size: 18px;}
 #achlist li {margin-bottom: 2px;}
 #stats {color: black; padding-top: 5px; padding-bottom: 5px;}
+#Save-Tab p, #Site-Tab p, #Statistics-Tab p, #Contact-Tab p, #Credits-Tab p {margin-left: 5px;font-size: 30px;color:black; font-family: "LGot";}
+#Save-Tab span, #Contact-Tab span, #Statistics-Tab span, #Credits-Tab span {margin-left: 5px;font-size: 32px;color:blue; font-family: "LGot";}
 #achievements>p {text-align: center;}
 #achievements li, h4 {color: black;}
 #achievements li {margin-bottom: 2px; font-size: 18px;}
@@ -72,21 +246,34 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 .changelog-exp {background-image: url('img/achievement3.png');font-size: 30px; color:white; font-family: "Arial"; font-weight: bold; text-align: center; background-color: #F7F7F7;}
 .changelog-item li, .changelog-item a {font-size: 20px; color: black; font-family: "Courier New"; font-weight: bold;}
 .unlocked {background-color: green;}
-#Player-upgrades li, #Tech-upgrades li, #Energy-upgrades li {color: black;}
 ul {list-style-type: none;}
 textarea {resize: none;color:black; font-size: 10px; width: 500px; height: 200px; margin-left: 5px;}
 #Game-Save {left: 50%; right: 50%; color: white; display: none; position: absolute; width: 200px; height: 50px;}
+.footer, .push {height: 100px;}
+.footer {width: 100%;text-align: center;background-color: #2a2a2a;overflow: hidden;}
+.bs-social-buttons {padding-left:0;padding-top: 3px;}
+.bs-social-buttons>li {display:inline-block;}
+#footer-content{text-align: center;}
+#github-btn {height: 40px; width: 140px; background-color: black;padding-left: 3px;}
+#github-img {height: 30px;width: 30px;float:left; margin-top: 5px;border-right: 1px solid #ffffff;}
+#github-txt {position: relative; top: 5px;}
+#reddit-btn {height: 40px; width: 140px; background-color: white;padding-left: 3px;}
+#reddit-img {height: 35px;width: 35px;float:left; margin-top: 3px;border-right: 1px solid #141313;}
+#reddit-txt {position: relative; top: 5px; color:black;}
 /* PSEUDO CLASSES */
 .btn:hover {background-color: #A1C436;}
+#staffbtn:hover {background-color: #9a0707; color: black;}
 #techbtn:hover {background-color: #5bc436; color: black;}
 #energybtn:hover {background-color: #e5e80c; color: black;}
+#uraniumbtn:hover {background-color: #cc0ce8; color: black;}
 #upgradesbtn:hover {background-color: #0c5fe8; color: black;}
 #settingsbtn:hover {background-color: #E8930C; color: black;}
-#achbtn:hover {background-color: #cc0ce8; color: black;}
-#newsbtn:hover {background-color: #e80c26; color: black;}
 #settings li:hover {background-color:black;}
 #upgrades a:hover {color:black;}
 #settings a:hover {color:black;}
+#github-btn:hover {background-color: #9b06c7;}
+#reddit-btn:hover {background-color: #f7670b;}
+.dropdown-menu > li > a:hover {background-color: #E8930C;background-image: none;}
 ul:hover {color: black;}
 .glyphicon {color: #808080;}
 .upgrade-unlocked {width: 90px; height: 90px; background-image: url('img/hexbtn90.png'); margin-left: 30px;}
