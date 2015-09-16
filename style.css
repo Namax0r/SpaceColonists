@@ -5,7 +5,7 @@
 /* #### Mobile Phones Portrait #### */
 @media screen and (max-device-width: 480px) and (orientation: portrait){
 
-.footer, .push {display:none}
+  .footer, .push,#img-bottom, #shadow-bot {display:none}
 }
 
 /* #### Mobile Phones Landscape #### */
@@ -25,7 +25,7 @@
 
 /* #### Tablets Portrait or Landscape #### */
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px){
-  .footer, .push {display:none}
+  .footer, .push,#img-bottom, #shadow-bot {display:none}
 }
 
 /* #### Desktops #### */
@@ -152,10 +152,10 @@
 margin: 0;
 }
 html, body {min-height:100%; }
-body {background-image: url('img/bottom.png'), url('img/Stars_Pattern_clip_art_hightt.png'); margin:0; padding:0; height:100%;
-      background-repeat: no-repeat, repeat;
-      background-size: 1000px, 800px;
-      background-position: bottom center, top;
+body {background-image: url('img/background-solid.png'); margin:0; padding:0; height:100%;
+      background-repeat: repeat;
+      background-size: 800px;
+      background-position: top;
       /*background-attachment:fixed;*/
   }
 html *{font-size: 23px; color: white; font-family: Recharge;}
@@ -163,8 +163,21 @@ html *{font-size: 23px; color: white; font-family: Recharge;}
 #top-notify p {color: white; font-size: 14px;float:left; margin-top:10px;margin-left: 5px;position: relative;}
 #notify-button {background-color: #f1d600; margin-right: 35px;margin-top:3px; float:right}
 #nick, #nick a {font-size: 15px;}
-#logo {display: block; margin: 0 auto; width: 900px;}
-#resources {display: block; position:absolute; left:50%; margin-left:-50px;}
+#logo-wrapper{background-image:  url('img/Stars_Pattern_clip_art_hightt.png');      background-repeat: repeat;
+      background-size: 800px;}
+#logo {display: block; margin: 0 auto; width: 900px; }
+#resources-bar {padding: 10px;}
+     #center-test {
+       margin: 0 auto;
+       max-width: 900px;
+
+     }
+#shadow-top, #shadow-bot {width:100%; height: 15px;}
+#shadow-top,#shadow-bot {box-shadow: 0 -5px 5px -5px black;}
+#img-bottom {height: 300px; width: 100%; background-image:  url('img/Stars_Pattern_clip_art_hightt.png');      background-repeat: repeat;
+      background-size: 800px;}
+.resource{font-family: Digital; float: left; width: 170px; }
+#clear-both { clear:both; }
 #Tech, #Energy, #Credits, #Uranium, #power-balance {font-family: Digital;}
 .wrapper {
 min-height: 100%;
@@ -213,7 +226,7 @@ overflow: hidden;
 #hide-uranium-refinery2 {display:none;}
 #imgexpsave {width: 100px;}
 .container {padding: 0px;}
-#cont-up {z-index: 1;margin-top: 320px; padding-bottom: 330px;}
+#cont-up {z-index: 1; padding-bottom: 130px;}
 .tab1 {border-bottom: 2px solid #9a0707;}
 .tab2 {border-bottom: 2px solid #5bc436;}
 .tab3 {border-bottom: 2px solid #e5e80c;}
@@ -253,7 +266,7 @@ textarea {resize: none;color:black; font-size: 10px; width: 500px; height: 200px
 .footer {width: 100%;text-align: center;background-color: #2a2a2a;overflow: hidden;}
 .bs-social-buttons {padding-left:0;padding-top: 3px;}
 .bs-social-buttons>li {display:inline-block;}
-#footer-content{text-align: center;}
+#footer-content, #footer-content a{text-align: center; font-family: LGot; font-size: 30px;}
 #github-btn {height: 40px; width: 140px; background-color: black;padding-left: 3px;}
 #github-img {height: 30px;width: 30px;float:left; margin-top: 5px;border-right: 1px solid #ffffff;}
 #github-txt {position: relative; top: 5px;}

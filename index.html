@@ -27,7 +27,7 @@
       }
     });
   </script>
- <!--<script type="text/javascript">
+  <!--<script type="text/javascript">
     $(document).ready(function() {
       $('#content').click(function() {
         $('#content').animate({
@@ -41,13 +41,6 @@
       });
     });
   </script>-->
-  <script>
-    $(document).ready(function() {
-      $("first").change(function() {
-        alert("The text has been changed.");
-      });
-    });
-  </script>
   <script>
     $(document).ready(function() {
       setTimeout(function() {
@@ -84,23 +77,38 @@
       <p>Your progress is saved automatically each minute. If you are in hurry and can't wait for next auto save, click the "Save Game" button located in "Settings" Tab."</p>
       <button id="notify-button" type="button" class="btn btn-default" onclick="hideNotify()">Got it!</button>
     </div>
-    <img id="logo" src="img/SpaceColonistsLogotrans2.png" alt="...">
+    <div id="logo-wrapper">
+      <img id="logo" src="img/SpaceColonistsLogotrans2.png" alt="...">
+    </div>
 
-    <div id="resources">
-      <img class="currency" src="img/credits.png" alt="Credits"> :
-      <span id="Credits"></span>
-      <br />
-      <img class="currency" src="img/honecomb2transparent.png" alt="Tech"> :
-      <span id="Tech"></span>
-      <br />
-      <img class="currency" src="img/energytransparentnormal.png" alt="Energy"> :
-      <span id="Energy"></span>
-      <br />
-      <img class="currency" src="img/uraore.png" alt="Uranium"> :
-      <span id="Uranium"></span>
-      <br />
-      <img class="currency" src="img/powerbalance.png" alt="Power Balance"> :
-      <span id="power-balance"></span>
+    <div id="shadow-top"></div>
+    <div class="container" id="resources-bar">
+      <div class="row" id="center-test">
+        <div class="resource ">
+          <img class="currency" src="img/credits.png" alt="Credits"> :
+          <span id="Credits"></span>
+          <br />
+        </div>
+        <div class="resource">
+          <img class="currency" src="img/honecomb2transparent.png" alt="Tech"> :
+          <span id="Tech"></span>
+          <br />
+        </div>
+        <div class="resource">
+          <img class="currency" src="img/energytransparentnormal.png" alt="Energy"> :
+          <span id="Energy"></span>
+          <br />
+        </div>
+        <div class="resource">
+          <img class="currency" src="img/uraore.png" alt="Uranium"> :
+          <span id="Uranium"></span>
+          <br />
+        </div>
+        <div class="resource">
+          <img class="currency" src="img/powerbalance.png" alt="Power Balance"> :
+          <span id="power-balance"></span>
+        </div>
+      </div>
     </div>
     <div id="cont-up" class="container">
       <h2 id="commander-name"></h2>
@@ -1834,7 +1842,7 @@
         </div>
         <!-- ============ NEWS TAB ============ -->
         <div id="news" class="tab-pane fade">
-          <h1 id="current-version">*Current Version 0.4.0*</h1>
+          <h1 id="current-version">*Current Version 0.4.0a*</h1>
           <h2 class="changelog-exp">Development road map</h2>
           <div class="changelog-item">
             <h3>DONE:</h3>
@@ -1855,6 +1863,12 @@
               <li>- Add Dev changelog on the website.</li>
               <li>- Make numbers generation speed up.</li>
               <li>- Colony Commander module.(PARTIAL)</li>
+              <li>- Make buildings have their functions rather than being idle resource givers. (PARTIAL)</li>
+              <li>- Add new resources.</li>
+              <li>- Add new units and buildings.</li>
+              <li>- Add more achievements.</li>
+              <li>- Further improve page layout.(PARTIAL)</li>
+              <li>- Add more upgrades.</li>
             </ul>
           </div>
 
@@ -1865,14 +1879,10 @@
               <li>- Cookies saves</li>
               <li>- Gameplay statistics</li>
               <li>- User settings</li>
-              <li>- Make buildings have their functions rather than being idle resource givers.</li>
+              <li>- Make buildings have their functions rather than being idle resource givers.(COMPLETE)</li>
               <li>- Make both resources to be used in relation to each other.</li>
-              <li>- Add new resources (?).</li>
-              <li>- Add new units and buildings.</li>
               <li>- Add bonuses for unlocking achievements.</li>
               <li>- Add personalisation options for users.</li>
-              <li>- Add more upgrades.</li>
-              <li>- Add more achievements / tweak existing ones.</li>
               <li>- Make mobile version of the website.</li>
               <li>- Complete Colony Commander module.</li>
               <li>- Further improve page layout.</li>
@@ -1887,7 +1897,17 @@
           </div>
           <h2 class="changelog-exp">Recent Changes, head over to "Settings" tab for full changelog.</h2>
           <div class="changelog-item">
-            <h3>*Version 0.4.0 - "Are we there yet ?!" * September 14th, 2015</h3>
+            <h3>*Version 0.4.0a * September 16th, 2015</h3>
+            <ul>
+              <li>- Changed resources panel from vertical to horizontal.</li>
+              <li>- Reworked website background.</li>
+              <li>- Added element shadow.</li>
+              <li>- Changed footer's font.</li>
+              <li>- Disabled character creator / renaming, until better solution is applied.</li>
+            </ul>
+          </div>
+          <div class="changelog-item">
+            <h3>*Version 0.4.0 - "Are we there yet ?!" * September 15th, 2015</h3>
             <ul>
               <li>- Added loading screen!</li>
               <li>- Added new resources (Credits and Uranium).</li>
@@ -2001,8 +2021,9 @@
           <button type="button" class="btn btn-danger" id="Delete" onclick="deleteSave(); history.go(0)">Delete Save</button>
         </div>
         <div id="Site-Tab" class="tab-pane fade">
-          <p>You can rename your commander and colony by clicking the button below.</p>
-          <button type="button" class="btn btn-default" onclick="renameCharacter()">Rename</button>
+          <p>Character creator disabled, until better solution is applied.</p>
+          <!--<p>You can rename your commander and colony by clicking the button below.</p>
+          <button type="button" class="btn btn-default" onclick="renameCharacter()">Rename</button>-->
         </div>
         <div id="Statistics-Tab" class="tab-pane fade">
           <div id="stats">
@@ -2041,6 +2062,8 @@
       </div>
       <div id="Game-Save">Game Saved !</div>
     </div>
+    <div id="shadow-bot"></div>
+    <div id="img-bottom"></div>
     <div class="push"></div>
   </div>
   <div class="footer">

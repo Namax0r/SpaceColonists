@@ -416,7 +416,7 @@ var colonyNamee;
 var defaultCommander = "Shy";
 var defaultColony = "Nothingness";
 
-function createCharacter() {
+/*function createCharacter() {
 
   //Ask player for commander and colony names
   if (player.commander.commanderName === "temp") {
@@ -461,7 +461,7 @@ function renameCharacter() {
     player.commander.colonyName = colonyNamee;
     document.getElementById('colony-name').innerHTML = "Colony:" + " " + colonyNamee;
   }
-}
+}*/
 
 function hideNotify() {
   document.getElementById('top-notify').style.display = "none";
@@ -1106,7 +1106,7 @@ window.setInterval(function() {
   checkAchievements();
   hideElements();
   checkUpgrades();
-  createCharacter();
+  //createCharacter();
 }, 3000);
 
 
