@@ -1,6 +1,7 @@
 ![alt text](http://imgur.com/M7X5T0Q.png)
 
-                                      *Current Version 0.4.0
+
+                                      *Current Version 0.4.1
 ___
 
 <em> Space Colonists is a java script incremental game prototype. </em>
@@ -54,6 +55,22 @@ ___
 
 
 #### **_Change Log:_** ####
+    *Version 0.4.1
+    17 September 2015
+      -Game should run correctly when in background tab now.
+      -Added support for HTTPS Everywhere add-on.
+      -Fixed cost of Thermal Power Station.
+      -Fixed upgrade price of Robots and Androids.
+___
+    *Version 0.4.0a
+    16 September 2015
+      -Changed resources panel from vertical to horizontal.
+      -Reworked website background.
+      -Added element shadow.
+      -Changed footer's font.
+      -Disabled character creator / renaming, until better solution is applied.
+___
+
     *Version 0.4.0 "Are we there yet ?!"
      14 September 2015
        -Added loading screen!
