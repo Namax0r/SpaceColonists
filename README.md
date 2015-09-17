@@ -1,6 +1,5 @@
 ![alt text](http://imgur.com/M7X5T0Q.png)
 
-
                                       *Current Version 0.4.1
 ___
 
@@ -70,7 +69,6 @@ ___
       -Changed footer's font.
       -Disabled character creator / renaming, until better solution is applied.
 ___
-
     *Version 0.4.0 "Are we there yet ?!"
      14 September 2015
        -Added loading screen!
