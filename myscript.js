@@ -712,7 +712,7 @@ function hideElements() {
 }
 
 function updateTotals() {
-  document.getElementById('mouse-clicks').innerHTML = player.clicks;
+//  document.getElementById('mouse-clicks').innerHTML = player.clicks;
   var energyOutcome = prettify(((player.workbench.owned * player.workbench.requires.powerCost) + (player.workshop.owned * player.workshop.requires.powerCost) +
     (player.resLab.owned * player.resLab.requires.powerCost) + (player.resFac.owned * player.resFac.requires.powerCost) +
     (player.roboticsFact.owned * player.roboticsFact.requires.powerCost) + (player.cyberLab.owned * player.cyberLab.requires.powerCost) +
