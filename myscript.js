@@ -2,10 +2,10 @@
 var player = {
   clicks: 0,
   speed: 5,
-  credits: 500,
-  tech: 500,
-  energy: 500,
-  uranium: 500,
+  credits: 0,
+  tech: 0,
+  energy: 0,
+  uranium: 0,
   commander: {
     commanderName: "temp",
     colonyName: "temp",
