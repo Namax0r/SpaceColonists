@@ -2,10 +2,10 @@
 var player = {
   clicks: 0,
   speed: 5,
-  credits: 0,
-  tech: 0,
-  energy: 0,
-  uranium: 0,
+  credits: 500,
+  tech: 500,
+  energy: 500,
+  uranium: 500,
   commander: {
     commanderName: "temp",
     colonyName: "temp",
@@ -157,7 +157,7 @@ var player = {
     recharge: 180,
     requires: {
       cost: 30000,
-      nextC: 15000,
+      nextC: 30000,
       staffCost: 1,
     }
   },
@@ -415,6 +415,9 @@ var commanderNamee;
 var colonyNamee;
 var defaultCommander = "Shy";
 var defaultColony = "Nothingness";
+var before = new Date();
+var interval = 1000 / player.speed;
+var compare;
 
 /*function createCharacter() {
 
@@ -711,8 +714,8 @@ function hideElements() {
   }
 }
 
-function updateTotals() {
-//  document.getElementById('mouse-clicks').innerHTML = player.clicks;
+function updateTotals(time) {
+  //  document.getElementById('mouse-clicks').innerHTML = player.clicks;
   var energyOutcome = prettify(((player.workbench.owned * player.workbench.requires.powerCost) + (player.workshop.owned * player.workshop.requires.powerCost) +
     (player.resLab.owned * player.resLab.requires.powerCost) + (player.resFac.owned * player.resFac.requires.powerCost) +
     (player.roboticsFact.owned * player.roboticsFact.requires.powerCost) + (player.cyberLab.owned * player.cyberLab.requires.powerCost) +
@@ -723,39 +726,50 @@ function updateTotals() {
     (player.nucPowPlant.owned * player.nucPowPlant.recharge) + (player.fusReactor.owned * player.fusReactor.recharge) +
     (player.uraReactor.owned * player.uraReactor.recharge)));
   //Credits
-  player.credits += ((player.colonist.owned * player.colonist.generates) / player.speed);
-  player.credits += ((player.engineer.owned * player.engineer.generates) / player.speed);
-  player.credits += ((player.inventor.owned * player.inventor.generates) / player.speed);
-  player.credits += ((player.scientist.owned * player.scientist.generates) / player.speed);
-  player.credits += ((player.robot.owned * player.robot.generates) / player.speed);
-  player.credits += ((player.android.owned * player.android.generates) / player.speed);
-  getResource(player, 'credits', 0.5);
+  player.credits += ((time * player.colonist.owned * player.colonist.generates) / player.speed);
+  player.credits += ((time * player.engineer.owned * player.engineer.generates) / player.speed);
+  player.credits += ((time * player.inventor.owned * player.inventor.generates) / player.speed);
+  player.credits += ((time * player.scientist.owned * player.scientist.generates) / player.speed);
+  player.credits += ((time * player.robot.owned * player.robot.generates) / player.speed);
+  player.credits += ((time * player.android.owned * player.android.generates) / player.speed);
+  getResource(player, 'credits', time * 0.5);
 
   if (energyOutcome < energyIncome || energyOutcome == energyIncome) {
     //Tech
-    player.tech += ((player.workbench.owned * player.workbench.generates) / player.speed);
-    player.tech += ((player.workshop.owned * player.workshop.generates) / player.speed);
-    player.tech += ((player.resLab.owned * player.resLab.generates) / player.speed);
-    player.tech += ((player.resFac.owned * player.resFac.generates) / player.speed);
-    player.tech += ((player.roboticsFact.owned * player.roboticsFact.generates) / player.speed);
-    player.tech += ((player.cyberLab.owned * player.cyberLab.generates) / player.speed);
+    player.tech += ((time * player.workbench.owned * player.workbench.generates) / player.speed);
+    player.tech += ((time * player.workshop.owned * player.workshop.generates) / player.speed);
+    player.tech += ((time * player.resLab.owned * player.resLab.generates) / player.speed);
+    player.tech += ((time * player.resFac.owned * player.resFac.generates) / player.speed);
+    player.tech += ((time * player.roboticsFact.owned * player.roboticsFact.generates) / player.speed);
+    player.tech += ((time * player.cyberLab.owned * player.cyberLab.generates) / player.speed);
     //Uranium
-    player.uranium += ((player.miningBot.owned * player.miningBot.generates) / player.speed);
-    player.uranium += ((player.uraSmelter.owned * player.uraSmelter.generates) / player.speed);
-    player.uranium += ((player.uraRefinery.owned * player.uraRefinery.generates) / player.speed);
+    player.uranium += ((time * player.miningBot.owned * player.miningBot.generates) / player.speed);
+    player.uranium += ((time * player.uraSmelter.owned * player.uraSmelter.generates) / player.speed);
+    player.uranium += ((time * player.uraRefinery.owned * player.uraRefinery.generates) / player.speed);
     //Energy remove
-    player.energy -= ((player.workbench.owned * player.workbench.requires.powerCost) / player.speed);
-    player.energy -= ((player.workshop.owned * player.workshop.requires.powerCost) / player.speed);
-    player.energy -= ((player.resLab.owned * player.resLab.requires.powerCost) / player.speed);
-    player.energy -= ((player.resFac.owned * player.resFac.requires.powerCost) / player.speed);
-    player.energy -= ((player.roboticsFact.owned * player.roboticsFact.requires.powerCost) / player.speed);
-    player.energy -= ((player.cyberLab.owned * player.cyberLab.requires.powerCost) / player.speed);
+    player.energy -= ((time * player.workbench.owned * player.workbench.requires.powerCost) / player.speed);
+    player.energy -= ((time * player.workshop.owned * player.workshop.requires.powerCost) / player.speed);
+    player.energy -= ((time * player.resLab.owned * player.resLab.requires.powerCost) / player.speed);
+    player.energy -= ((time * player.resFac.owned * player.resFac.requires.powerCost) / player.speed);
+    player.energy -= ((time * player.roboticsFact.owned * player.roboticsFact.requires.powerCost) / player.speed);
+    player.energy -= ((time * player.cyberLab.owned * player.cyberLab.requires.powerCost) / player.speed);
     if (player.miningBot >= 1) {
-      getResource(player, 'uranium', 0.1);
+      getResource(player, 'uranium', time * 0.1);
     }
     if (player.workbench >= 1) {
-      getResource(player, 'tech', 0.1);
+      getResource(player, 'tech', time * 0.1);
     }
+  }
+  //Energy add
+  player.energy += ((time * player.battPack.owned * player.battPack.generates) / player.speed);
+  player.energy += ((time * player.solPan.owned * player.solPan.generates) / player.speed);
+  player.energy += ((time * player.solPanFarm.owned * player.solPanFarm.generates) / player.speed);
+  player.energy += ((time * player.termPowStation.owned * player.termPowStation.generates) / player.speed);
+  player.energy += ((time * player.nucPowPlant.owned * player.nucPowPlant.generates) / player.speed);
+  player.energy += ((time * player.fusReactor.owned * player.fusReactor.generates) / player.speed);
+  player.energy += ((time * player.uraReactor.owned * player.uraReactor.generates) / player.speed);
+  if (player.battPack >= 1) {
+    getResource(player, 'energy', time * 0.1);
   }
   //Energy add
   player.energy += ((player.battPack.owned * player.battPack.generates) / player.speed);
@@ -765,12 +779,6 @@ function updateTotals() {
   player.energy += ((player.nucPowPlant.owned * player.nucPowPlant.generates) / player.speed);
   player.energy += ((player.fusReactor.owned * player.fusReactor.generates) / player.speed);
   player.energy += ((player.uraReactor.owned * player.uraReactor.generates) / player.speed);
-
-
-
-  if (player.battPack >= 1) {
-    getResource(player, 'energy', 0.1);
-  }
 
   if (player.credits <= 1000) {
     document.getElementById('Credits').innerHTML = prettify(player.credits, 1);
@@ -1099,8 +1107,21 @@ window.setInterval(function() {
 }, 60000);
 
 window.setInterval(function() {
-  updateTotals();
-}, 1000 / player.speed);
+  now = new Date();
+  var elapsedTime = (now.getTime() - before.getTime());
+
+  if (elapsedTime > interval) {
+    //Recover the time lost while inactive.
+    compare = Math.floor(elapsedTime / interval);
+    //Add resources while inactive.
+    updateTotals(compare);
+  } else {
+    updateTotals(1);
+  }
+  //console.log ("elapsed" + " " +elapsedTime);
+  //console.log ("compared" + " " +compare);
+  before = now;
+}, interval);
 
 window.setInterval(function() {
   checkAchievements();
