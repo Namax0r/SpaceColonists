@@ -2,7 +2,10 @@
 <html>
 
 <head>
-  <title>Space Colonists</title>
+  <title>Space Colonists - a Javascript incremental | idle game project.</title>
+  <meta content="Space Colonists - a Javascript incremental / idle game project." property="og:title">
+  <meta content="Play role of a space colony commander. Collect resources, build and lead your colony to glory in this Javascript incremental / idle game. " name="description">
+  <meta content="space, colony, colonists, browser, incremental, idle, game, javascript, commander, simulator, aliens, cosmos, universe, koksman, project " name="keywords">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
@@ -97,6 +100,11 @@
       <p>Your progress is saved automatically each minute. If you are in hurry and can't wait for next auto save, click the "Save Game" button located in "Settings" Tab."</p>
       <button id="notify-button" type="button" class="btn btn-default" onclick="hideNotify()">Got it!</button>
     </div>
+    <audio controls="controls" autostart="0" loop="loop">
+      <source src="audio/spaceambient.ogg" type="audio/ogg" />
+      <source src="audio/spaceambient.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+  </audio>
     <div id="logo-wrapper">
       <img id="logo" src="img/SpaceColonistsLogotrans2.png" alt="...">
     </div>

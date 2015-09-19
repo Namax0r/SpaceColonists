@@ -159,6 +159,7 @@ body {background-image: url('img/background-solid.png'); margin:0; padding:0; he
       /*background-attachment:fixed;*/
   }
 html *{font-size: 23px; color: white; font-family: Recharge;}
+audio {height: 25px; width: 300px;}
 #top-notify {height: auto ;background-color: #007df1; width: 100%;margin-bottom: 5px;position: relative;overflow: hidden;}
 #top-notify p {color: white; font-size: 14px;float:left; margin-top:10px;margin-left: 5px;position: relative;}
 #notify-button {background-color: #f1d600; margin-right: 35px;margin-top:3px; float:right}
