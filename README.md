@@ -1,6 +1,6 @@
 ![alt text](http://imgur.com/M7X5T0Q.png)
 
-                                      *Current Version 0.4.1
+                                      *Current Version 0.4.2
 ___
 
 
@@ -55,6 +55,12 @@ ___
 
 
 #### **_Change Log:_** ####
+    *Version 0.4.2
+     19 September 2015
+      -Added chat feature (sometimes it's not displaying).
+      -Added background music.
+      -Small changes for the SEO.
+___    
     *Version 0.4.1
     17 September 2015
       -Game should run correctly when in background tab now.
