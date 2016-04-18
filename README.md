@@ -1,11 +1,20 @@
-![alt text](http://imgur.com/M7X5T0Q.png)
+![SC Logo](http://imgur.com/M7X5T0Q.png)
+<em> Space Colonists is a java script incremental game prototype. </em>
 
                                       *Current Version 0.4.2
 ___
 
 
-<em> Space Colonists is a java script incremental game prototype. </em>
 
+Player starts the game with nothing but a will to expand his colony. 
+
+![Resources Bar](http://i.imgur.com/aYm2Dox.png)
+
+Spending resources, buying new units and buldings, upgrading your staff and facilities, maintaining power balace are key components to see your colony thrive.
+
+![SC Logo](http://i.imgur.com/iO807c2.png)
+
+___
 |   To Do List:     |
 | ------------- |
 | |
